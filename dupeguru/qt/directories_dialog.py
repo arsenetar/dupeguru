@@ -32,7 +32,7 @@ from dupeguru.qt.recent import Recent
 from dupeguru.qt.util import move_to_screen_center, create_actions
 
 from dupeguru.qt import platform
-from dupeguru.qt.directories_model import DirectoriesModel, DirectoriesDelegate
+from dupeguru.qt.directories_model import DirectoriesModel, DirectoriesDelegate, DirectoriesView
 
 tr = trget("ui")
 
@@ -187,7 +187,7 @@ class DirectoriesDialog(QMainWindow):
         self.verticalLayout.addLayout(hl)
         self.promptLabel = QLabel(tr('Select folders to scan and press "Scan".'), self.centralwidget)
         self.verticalLayout.addWidget(self.promptLabel)
-        self.treeView = QTreeView(self.centralwidget)
+        self.treeView = DirectoriesView(self.centralwidget)
         self.treeView.setSelectionMode(QAbstractItemView.SelectionMode.ExtendedSelection)
         self.treeView.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self.treeView.setAcceptDrops(True)

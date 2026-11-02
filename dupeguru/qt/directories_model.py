@@ -6,7 +6,7 @@
 # which should be included with this package. The terms are also available at
 # http://www.gnu.org/licenses/gpl-3.0.html
 
-from PyQt6.QtCore import pyqtSignal, Qt, QRect, QUrl, QModelIndex, QItemSelection
+from PyQt6.QtCore import pyqtSignal, Qt, QRect, QUrl, QModelIndex, QItemSelection, QItemSelectionModel, QEvent
 from PyQt6.QtWidgets import (
     QComboBox,
     QStyledItemDelegate,
@@ -14,6 +14,7 @@ from PyQt6.QtWidgets import (
     QStyleOptionComboBox,
     QStyleOptionViewItem,
     QApplication,
+    QTreeView,
 )
 from PyQt6.QtGui import QBrush
 
@@ -24,6 +25,21 @@ tr = trget("ui")
 
 HEADERS = [tr("Name"), tr("State")]
 STATES = [tr("Normal"), tr("Reference"), tr("Excluded")]
+
+
+class DirectoriesView(QTreeView):
+    def selectionCommand(self, index, event=None):
+        # Opening a selected state editor must not collapse a bulk selection.
+        if (
+            event is not None
+            and event.type() in (QEvent.MouseButtonPress, QEvent.MouseButtonRelease)
+            and event.button() == Qt.LeftButton
+            and event.modifiers() == Qt.NoModifier
+            and index.column() == 1
+            and self.selectionModel().isSelected(index)
+        ):
+            return QItemSelectionModel.NoUpdate
+        return super().selectionCommand(index, event)
 
 
 class DirectoriesDelegate(QStyledItemDelegate):
@@ -136,9 +152,12 @@ class DirectoriesModel(TreeModel):
     def setData(self, index, value, role):
         if not index.isValid() or role != Qt.ItemDataRole.EditRole or index.column() != 1:
             return False
-        node = index.internalPointer()
-        ref = node.ref
-        ref.state = value
+        if value not in range(len(STATES)):
+            return False
+        selected = self.view.selectionModel().selectedRows(1)
+        # Programmatic edits outside the selection must only change their target.
+        indexes = selected if index in selected else [index]
+        self.model.set_node_states([item.internalPointer().ref for item in indexes], value)
         return True
 
     def supportedDropActions(self):

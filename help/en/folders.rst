@@ -69,6 +69,16 @@ folder if you want to be sure that you won't delete any file from it.
 When you set the state of a directory, all subfolders of this folder automatically inherit this
 state unless you explicitly set a subfolder's state.
 
+To change several folders at once, use Ctrl-click to select individual rows or Shift-click to
+select a range, just as in the results window. Click the State cell of any selected row and
+choose Normal, Reference, or Excluded. The choice applies to every selected folder, while the
+selection and expanded folders remain in place.
+
+For example, leave Albums set to Normal, expand it, select only its artist subfolders, then
+choose Reference. Albums stays Normal and the artists' deeper subfolders inherit Reference.
+If a parent and its child are both selected, both receive the chosen state. Changing a parent's
+state still resets its descendants' overrides according to the usual inheritance rules.
+
 Scan
 ----
 

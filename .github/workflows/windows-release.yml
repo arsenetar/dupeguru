@@ -1,0 +1,82 @@
+name: Windows release
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+      - uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548
+        with:
+          python-version: "3.10"
+      - name: Install build dependencies
+        run: |
+          python -m pip install -r requirements.txt -r requirements-extra.txt setuptools black==24.2.0 flake8==7.0.0
+          choco install nsis --no-progress -y
+      - name: Check feature formatting and lint
+        run: |
+          python -m black --check dupeguru/core/gui/directory_tree.py dupeguru/qt/directories_model.py dupeguru/qt/directories_dialog.py dupeguru/qt/tests
+          python -m flake8 --max-line-length=120 dupeguru/core/gui/directory_tree.py dupeguru/qt/directories_model.py dupeguru/qt/directories_dialog.py dupeguru/qt/tests
+      - name: Build application
+        run: python build.py
+      - name: Run core and Qt regression tests
+        run: python -m pytest core hscommon dupeguru/qt/tests --junitxml=build/test-results.xml
+      - name: Package Windows installer
+        run: |
+          python package.py
+          if (!(Test-Path 'dist/dupeguru_win64_4.3.2.exe')) { throw 'Installer missing' }
+          if (!(Test-Path 'dist/dupeguru-win64/dupeguru-win64.exe')) { throw 'Application missing' }
+      - name: Smoke test packaged application
+        run: |
+          $process = Start-Process -FilePath 'dist/dupeguru-win64/dupeguru-win64.exe' -PassThru -WindowStyle Hidden
+          try {
+            $ready = $false
+            for ($attempt = 0; $attempt -lt 30; $attempt++) {
+              Start-Sleep -Seconds 1
+              $process.Refresh()
+              if ($process.HasExited) { throw 'Packaged application exited unexpectedly' }
+              if ($process.MainWindowHandle -ne 0) { $ready = $true; break }
+            }
+            if (!$ready) { throw 'Packaged application did not open its window' }
+            Write-Output "Packaged application opened: $($process.MainWindowTitle)"
+          } finally {
+            if (!$process.HasExited) { Stop-Process -Id $process.Id }
+          }
+      - name: Prepare release assets
+        run: |
+          New-Item -ItemType Directory release
+          Copy-Item dist/dupeguru_win64_4.3.2.exe release/dupeguru-4.3.2-windows-x64-setup.exe
+          Compress-Archive -Path dist/dupeguru-win64 -DestinationPath release/dupeguru-4.3.2-windows-x64-portable.zip
+          Get-ChildItem release -File | ForEach-Object {
+            $hash = (Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLower()
+            "$hash  $($_.Name)"
+          } | Set-Content release/SHA256SUMS.txt
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        with:
+          name: windows-release
+          path: release/*
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f
+        if: always()
+        with:
+          name: test-results
+          path: build/test-results.xml
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8
+      - uses: actions/download-artifact@v4
+        with:
+          name: windows-release
+          path: release
+      - name: Publish tested Windows release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create v4.3.2 release/* --target "$GITHUB_SHA" --title "dupeGuru 4.3.2 — bulk folder states" --notes-file RELEASE_NOTES.md

@@ -7,6 +7,7 @@
 # http://www.gnu.org/licenses/gpl-3.0.html
 
 from dupeguru.hscommon.gui.tree import Tree, Node
+from typing import Iterable
 
 from dupeguru.core.directories import DirectoryState
 from dupeguru.core.gui.base import DupeGuruGUIObject
@@ -95,6 +96,19 @@ class DirectoryTree(Tree, DupeGuruGUIObject):
     def select_all(self):
         self.selected_nodes = list(self)
         self.view.refresh()
+
+    def set_node_states(self, nodes: Iterable[DirectoryNode], value: int) -> None:
+        """Apply a state to a snapshot of nodes, refreshing inherited states once.
+
+        Parents run first so a parent change cannot erase a selected child's
+        update. Unselected descendants retain the usual inheritance behavior.
+        """
+        state = STATE_ORDER[value]
+        paths = {node._directory_path for node in nodes}
+        for path in sorted(paths, key=lambda path: (len(path.parts), str(path))):
+            self.app.directories.set_state(path, state)
+        if paths:
+            self.update_all_states()
 
     def update_all_states(self):
         for node in self:
