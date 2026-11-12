@@ -32,6 +32,7 @@ def setup(app):
     app.connect('autodoc-process-signature', fix_nulljob_in_sig)
 
 autodoc_member_order = 'groupwise'
+autodoc_mock_imports = ["dupeguru.core.pe._block", "dupeguru.core.pe._cache", "dupeguru.qt.pe._block"]
 
 # -- General configuration -----------------------------------------------------
 
