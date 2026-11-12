@@ -117,6 +117,37 @@ class TestCaseDupeGuru:
         app.start_scanning()
         eq_(len(app.results.groups), 0)
 
+    def test_hardlink_dupes_are_keyed_on_device_as_well_as_inode(self):
+        # Issue #1388. An inode number is only unique within one filesystem, so two
+        # unrelated files on different devices can share one. Keying the seen set on
+        # the inode alone dropped the second file from the scan entirely, which made
+        # results shrink on every rescan.
+        class FakeStat:
+            def __init__(self, dev, ino):
+                self.st_dev = dev
+                self.st_ino = ino
+
+        class FakePath:
+            def __init__(self, dev, ino):
+                self._stat = FakeStat(dev, ino)
+
+            def stat(self):
+                return self._stat
+
+        class FakeEntry:
+            def __init__(self, dev, ino):
+                self.path = FakePath(dev, ino)
+
+        # Same inode, different devices: not hardlinks, so both are kept.
+        on_disk_a = FakeEntry(1, 42)
+        on_disk_b = FakeEntry(2, 42)
+        eq_(app.DupeGuru._remove_hardlink_dupes([on_disk_a, on_disk_b]), [on_disk_a, on_disk_b])
+
+        # Same device and inode: a real hardlink, so only the first is kept.
+        first = FakeEntry(1, 42)
+        second = FakeEntry(1, 42)
+        eq_(app.DupeGuru._remove_hardlink_dupes([first, second]), [first])
+
     def test_rename_when_nothing_is_selected(self):
         # Issue #140
         # It's possible that rename operation has its selected row swept off from under it, thus
