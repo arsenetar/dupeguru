@@ -20,6 +20,7 @@ from core.directories import (
     DirectoryState,
     AlreadyThereError,
     InvalidPathError,
+    UnreachablePathError,
 )
 from core.exclude import ExcludeList, ExcludeDict
 
@@ -242,6 +243,46 @@ def test_invalid_path():
     with raises(InvalidPathError):
         d.add_path(p)
     eq_(0, len(d))
+
+
+def test_add_path_when_path_cannot_be_probed(monkeypatch):
+    """A path we can't even probe (disconnected network share, unauthenticated SMB guest access, ...) makes
+    Path.exists() raise OSError instead of returning False. We don't want that error to escape add_path()."""
+
+    def exists(self, *args, **kwargs):
+        raise OSError(1272, "You can't access this shared folder")
+
+    monkeypatch.setattr(Path, "exists", exists)
+    d = Directories()
+    with raises(UnreachablePathError):
+        d.add_path(Path("foo_bar"))
+    eq_(0, len(d))
+
+
+def test_load_from_file_with_unprobable_path(tmpdir, monkeypatch):
+    """An unavailable folder in the saved selection must not prevent the other ones from being loaded (it used
+    to crash the app on startup)."""
+    p1 = Path(str(tmpdir.join("p1")))
+    p1.mkdir()
+    unreachable = Path(str(tmpdir.join("unreachable")))
+    d1 = Directories()
+    d1.add_path(p1)
+    d1._dirs.append(unreachable)
+    tmpxml = str(tmpdir.join("directories_testunit.xml"))
+    d1.save_to_file(tmpxml)
+
+    real_exists = Path.exists
+
+    def exists(self, *args, **kwargs):
+        if self == unreachable:
+            raise OSError(1272, "You can't access this shared folder")
+        return real_exists(self, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "exists", exists)
+    d2 = Directories()
+    d2.load_from_file(tmpxml)
+    eq_(1, len(d2))
+    eq_(p1, d2[0])
 
 
 def test_set_state_on_invalid_path():
