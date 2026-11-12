@@ -94,7 +94,7 @@ msgstr "Komentarz"
 #: core\me\result_table.py:34 core\pe\result_table.py:26
 #: core\se\result_table.py:24
 msgid "Match %"
-msgstr "Mecz %"
+msgstr "Dopasowanie %"
 
 #: core\me\result_table.py:35 core\se\result_table.py:25
 msgid "Words Used"
