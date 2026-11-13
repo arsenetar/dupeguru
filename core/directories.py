@@ -91,45 +91,86 @@ class Directories:
         return DirectoryState.NORMAL
 
     def _get_files(self, from_path, fileclasses, j):
+        # Walk iteratively and track resolved paths: directory links can point back to an
+        # ancestor, while deeply nested trees can also exceed Python's recursion limit.
+        visited = set()
+
+        def open_directory(path):
+            try:
+                real_path = os.path.normcase(os.path.realpath(path))
+            except OSError:
+                real_path = None
+            if real_path is not None:
+                if real_path in visited:
+                    return None
+                visited.add(real_path)
+            try:
+                entries = os.scandir(path)
+            except OSError:
+                return None
+            root_path = Path(path)
+            state = self.get_state(root_path)
+            # if we have no un-excluded dirs under this directory skip going deeper
+            skip_dirs = state == DirectoryState.EXCLUDED and not any(
+                p.parts[: len(root_path.parts)] == root_path.parts for p in self.states
+            )
+            return {
+                "path": path,
+                "entries": entries,
+                "root_path": root_path,
+                "state": state,
+                "skip_dirs": skip_dirs,
+                "count": 0,
+            }
+
+        stack = []
         try:
-            with os.scandir(from_path) as iter:
-                root_path = Path(from_path)
-                state = self.get_state(root_path)
-                # if we have no un-excluded dirs under this directory skip going deeper
-                skip_dirs = state == DirectoryState.EXCLUDED and not any(
-                    p.parts[: len(root_path.parts)] == root_path.parts for p in self.states
-                )
-                count = 0
-                for item in iter:
-                    j.check_if_cancelled()
-                    try:
-                        if item.is_dir():
-                            if skip_dirs:
-                                continue
-                            yield from self._get_files(item.path, fileclasses, j)
-                            continue
-                        elif state == DirectoryState.EXCLUDED:
-                            continue
-                        # File excluding or not
-                        if (
-                            self._exclude_list is None
-                            or not self._exclude_list.mark_count
-                            or not self._exclude_list.is_excluded(str(from_path), item.name)
-                        ):
-                            file = fs.get_file(item, fileclasses=fileclasses)
-                            if file:
-                                file.is_ref = state == DirectoryState.REFERENCE
-                                count += 1
-                                yield file
-                    except (OSError, fs.InvalidPath):
-                        pass
-                logging.debug(
-                    "Collected %d files in folder %s",
-                    count,
-                    str(root_path),
-                )
-        except OSError:
-            pass
+            first = open_directory(from_path)
+            if first is not None:
+                stack.append(first)
+            while stack:
+                frame = stack[-1]
+                try:
+                    item = next(frame["entries"])
+                except StopIteration:
+                    frame["entries"].close()
+                    stack.pop()
+                    logging.debug(
+                        "Collected %d files in folder %s",
+                        frame["count"],
+                        str(frame["root_path"]),
+                    )
+                    continue
+                except OSError:
+                    frame["entries"].close()
+                    stack.pop()
+                    continue
+                j.check_if_cancelled()
+                try:
+                    if item.is_dir():
+                        if not frame["skip_dirs"]:
+                            child = open_directory(item.path)
+                            if child is not None:
+                                stack.append(child)
+                        continue
+                    if frame["state"] == DirectoryState.EXCLUDED:
+                        continue
+                    # File excluding or not
+                    if (
+                        self._exclude_list is None
+                        or not self._exclude_list.mark_count
+                        or not self._exclude_list.is_excluded(str(frame["path"]), item.name)
+                    ):
+                        file = fs.get_file(item, fileclasses=fileclasses)
+                        if file:
+                            file.is_ref = frame["state"] == DirectoryState.REFERENCE
+                            frame["count"] += 1
+                            yield file
+                except (OSError, fs.InvalidPath):
+                    pass
+        finally:
+            for frame in stack:
+                frame["entries"].close()
 
     def _get_folders(self, from_folder, j):
         j.check_if_cancelled()
