@@ -43,6 +43,46 @@ def special_folder_path(special_folder: SpecialFolder, portable: bool = False) -
     return _special_folder_path(special_folder, portable=portable)
 
 
+def _select_in_explorer(path: str) -> bool:
+    """Show ``path`` selected in its folder in Windows Explorer, through the shell.
+
+    ``explorer /select,<path>`` loses the selection when Explorer opens a folder it hasn't
+    listed yet: the window shows the top of the folder, and only a second try selects the file.
+    SHOpenFolderAndSelectItems selects it once the folder is listed.
+
+    Returns False if the shell couldn't do it, so that the caller can fall back to explorer.exe.
+    """
+    import ctypes
+    from ctypes import wintypes
+
+    shell32 = ctypes.windll.shell32
+    ole32 = ctypes.windll.ole32
+    shell32.SHParseDisplayName.argtypes = [
+        wintypes.LPCWSTR,
+        ctypes.c_void_p,
+        ctypes.POINTER(ctypes.c_void_p),
+        wintypes.ULONG,
+        ctypes.c_void_p,
+    ]
+    shell32.SHOpenFolderAndSelectItems.argtypes = [ctypes.c_void_p, wintypes.UINT, ctypes.c_void_p, wintypes.DWORD]
+    ole32.CoTaskMemFree.argtypes = [ctypes.c_void_p]
+    # The shell needs COM on this thread. Qt's main thread already has it, and then this only
+    # adds a reference, which the CoUninitialize below gives back.
+    com_initialized = ole32.CoInitialize(None) >= 0
+    try:
+        pidl = ctypes.c_void_p()
+        if shell32.SHParseDisplayName(path, None, ctypes.byref(pidl), 0, None) < 0:
+            return False
+        try:
+            # With no child items, the absolute item ID is the one item to select.
+            return shell32.SHOpenFolderAndSelectItems(pidl, 0, None, 0) >= 0
+        finally:
+            ole32.CoTaskMemFree(pidl)
+    finally:
+        if com_initialized:
+            ole32.CoUninitialize()
+
+
 try:
     from PyQt5.QtCore import QUrl, QStandardPaths
     from PyQt5.QtGui import QDesktopServices
@@ -60,7 +100,8 @@ try:
 
     def _reveal_path(path: str) -> None:
         if ISWINDOWS:
-            subprocess.run(["explorer", "/select,", op.abspath(path)])
+            if not _select_in_explorer(op.abspath(path)):
+                subprocess.run(["explorer", "/select,", op.abspath(path)])
         elif ISOSX:
             subprocess.run(["open", "-R", op.abspath(path)])
         else:
