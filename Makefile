@@ -1,6 +1,6 @@
 PYTHON ?= python3
 PYTHON_VERSION_MINOR := $(shell ${PYTHON} -c "import sys; print(sys.version_info.minor)")
-RCC ?= rcc
+RCC ?= pyside6-rcc
 REQ_MINOR_VERSION = 7
 PREFIX ?= /usr/local
 
