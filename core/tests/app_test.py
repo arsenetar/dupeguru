@@ -76,6 +76,23 @@ class TestCaseDupeGuru:
             eq_(call["dest_path"], Path(tmp_dir, "foo"))
             eq_(call["source_path"], f.path)
 
+    def test_copy_or_move_relative_without_location_path(self, tmpdir, monkeypatch):
+        # Regression test for Issue #1426: location_path is None when dupe is not in self.directories
+        p = Path(str(tmpdir))
+        p.joinpath("foo").touch()
+        monkeypatch.setattr(
+            hscommon.conflict,
+            "smart_copy",
+            log_calls(lambda source_path, dest_path: None),
+        )
+        monkeypatch.setattr(app, "smart_copy", hscommon.conflict.smart_copy)
+        monkeypatch.setattr(os, "makedirs", lambda path: None)
+        dgapp = TestApp().app
+        f = fs.File(p.joinpath("foo"))
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            dgapp.copy_or_move(f, True, tmp_dir, 1)
+            eq_(1, len(hscommon.conflict.smart_copy.calls))
+
     def test_copy_or_move_clean_empty_dirs(self, tmpdir, monkeypatch):
         tmppath = Path(str(tmpdir))
         sourcepath = tmppath.joinpath("source")
