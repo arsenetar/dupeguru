@@ -6,3 +6,4 @@ Icon={iconpath}
 Terminal=false
 Type=Application
 Categories=Utility;
+StartupWMClass=dupeguru
