@@ -118,9 +118,22 @@ class SqliteCache:
             ).fetchall()
             version = None
             if has_schema:
-                version = conn.execute("SELECT version FROM schema_version ORDER BY version DESC").fetchone()[0]
+                row = conn.execute("SELECT version FROM schema_version ORDER BY version DESC").fetchone()
+                if row:
+                    version = row[0]
             else:
                 conn.execute("CREATE TABLE schema_version (version int PRIMARY KEY, description TEXT)")
+            if version == self.schema_version:
+                # Older builds can recreate pictures without updating schema_version.
+                # Check the actual table before trusting the version marker.
+                try:
+                    # WHERE 1=0 validates column names without reading any cached rows.
+                    conn.execute(
+                        "SELECT path, mtime_ns, blocks, blocks2, blocks3, blocks4, blocks5, "
+                        "blocks6, blocks7, blocks8 FROM pictures WHERE 1=0"
+                    )
+                except sqlite.OperationalError:
+                    version = None
             if version != self.schema_version:
                 conn.execute(self.drop_table_query)
                 conn.execute(
