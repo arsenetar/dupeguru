@@ -13,12 +13,12 @@ from PyQt5.QtCore import QCoreApplication
 from PyQt5.QtGui import QIcon, QPixmap
 from PyQt5.QtWidgets import QApplication
 
-from hscommon.trans import install_gettext_trans_under_qt
-from qt.error_report_dialog import install_excepthook
-from qt.util import setup_qt_logging, create_qsettings
-from qt import dg_rc  # noqa: F401
-from qt.platform import BASE_PATH
-from core import __version__, __appname__
+from dupeguru.hscommon.trans import install_gettext_trans_under_qt
+from dupeguru.qt.error_report_dialog import install_excepthook
+from dupeguru.qt.util import setup_qt_logging, create_qsettings
+from dupeguru.qt import dg_rc  # noqa: F401
+from dupeguru.qt.platform import BASE_PATH
+from dupeguru.core import __version__, __appname__
 
 # SIGQUIT is not defined on Windows
 if sys.platform == "win32":
@@ -69,7 +69,7 @@ def main():
     timer.timeout.connect(lambda: None)
     # Many strings are translated at import time, so this is why we only import after the translator
     # has been installed
-    from qt.app import DupeGuru
+    from dupeguru.qt.app import DupeGuru
 
     app.setWindowIcon(QIcon(QPixmap(f":/{DupeGuru.LOGO_NAME}")))
     global dgapp

@@ -1,6 +1,6 @@
 PYTHON ?= python3
 PYTHON_VERSION_MINOR := $(shell ${PYTHON} -c "import sys; print(sys.version_info.minor)")
-PYRCC5 ?= pyrcc5
+RCC ?= rcc
 REQ_MINOR_VERSION = 7
 PREFIX ?= /usr/local
 
@@ -35,7 +35,7 @@ endif
 # Our build scripts are not very "make like" yet and perform their task in a bundle. For now, we
 # use one of each file to act as a representative, a target, of these groups.
 
-packages = hscommon core qt
+packages = dupeguru/hscommon dupeguru/core dupeguru/qt
 localedirs = $(wildcard locale/*/LC_MESSAGES)
 pofiles = $(wildcard locale/*/LC_MESSAGES/*.po)
 mofiles = $(patsubst %.po,%.mo,$(pofiles))
@@ -43,7 +43,7 @@ mofiles = $(patsubst %.po,%.mo,$(pofiles))
 vpath %.po $(localedirs)
 vpath %.mo $(localedirs)
 
-all: | env i18n modules qt/dg_rc.py
+all: | env i18n modules dupeguru/qt/dg_rc.py
 	@echo "Build complete! You can run dupeGuru with 'make run'"
 
 run:
@@ -76,8 +76,8 @@ endif
 build/help: | env
 	$(VENV_PYTHON) build.py --doc
 
-qt/dg_rc.py: qt/dg.qrc
-	$(PYRCC5) qt/dg.qrc > qt/dg_rc.py
+dupeguru/qt/dg_rc.py: dupeguru/qt/dg.qrc
+	$(RCC) dupeguru/qt/dg.qrc > dupeguru/qt/dg_rc.py
 
 i18n: $(mofiles)
 
@@ -118,6 +118,6 @@ uninstall:
 clean:
 	-rm -rf build
 	-rm locale/*/LC_MESSAGES/*.mo
-	-rm core/pe/*.$(SO) qt/pe/*.$(SO)
+	-rm dupeguru/core/pe/*.$(SO) dupeguru/qt/pe/*.$(SO)
 
 .PHONY: clean normpo mergepot modules i18n reqs run pyc install uninstall all

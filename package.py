@@ -15,7 +15,7 @@ import platform
 import distro
 import re
 
-from hscommon.build import (
+from dupeguru.hscommon.build import (
     print_and_do,
     copy_packages,
     build_debian_changelog,
