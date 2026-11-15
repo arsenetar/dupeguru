@@ -163,6 +163,7 @@ class Preferences(PreferencesBase):
         self.remove_empty_folders = get("RemoveEmptyFolders", self.remove_empty_folders)
         self.rehash_ignore_mtime = get("RehashIgnoreMTime", self.rehash_ignore_mtime)
         self.include_exists_check = get("IncludeExistsCheck", self.include_exists_check)
+        self.allow_marking_refs = get("AllowMarkingRefs", self.allow_marking_refs)
         self.debug_mode = get("DebugMode", self.debug_mode)
         self.profile_scan = get("ProfileScan", self.profile_scan)
         self.destination_type = get("DestinationType", self.destination_type)
@@ -235,6 +236,7 @@ class Preferences(PreferencesBase):
         self.remove_empty_folders = False
         self.rehash_ignore_mtime = False
         self.include_exists_check = True
+        self.allow_marking_refs = False
         self.debug_mode = False
         self.profile_scan = False
         self.destination_type = 1
@@ -289,6 +291,7 @@ class Preferences(PreferencesBase):
         set_("RemoveEmptyFolders", self.remove_empty_folders)
         set_("RehashIgnoreMTime", self.rehash_ignore_mtime)
         set_("IncludeExistsCheck", self.include_exists_check)
+        set_("AllowMarkingRefs", self.allow_marking_refs)
         set_("DebugMode", self.debug_mode)
         set_("ProfileScan", self.profile_scan)
         set_("DestinationType", self.destination_type)

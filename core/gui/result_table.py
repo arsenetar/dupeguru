@@ -67,11 +67,13 @@ class DupeRow(Row):
 
     @property
     def markable(self):
-        return self._app.results.is_markable(self._dupe)
+        results = self._app.results
+        return results.is_markable(self._dupe) or results.is_ref_markable(self._dupe)
 
     @property
     def marked(self):
-        return self._app.results.is_marked(self._dupe)
+        results = self._app.results
+        return results.is_marked(self._dupe) or results.is_ref_marked(self._dupe)
 
     @marked.setter
     def marked(self, value):

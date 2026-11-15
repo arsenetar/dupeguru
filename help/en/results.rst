@@ -10,7 +10,9 @@ About duplicate groups
 
 A duplicate group is a group of files that all match together. Every group has a **reference file** and one or more **duplicate files**. The reference file is the first file of the group. Its mark box is disabled. Below it, and indented, are the duplicate files.
 
-You can mark duplicate files, but you can never mark the reference file of a group. This is a security measure to prevent dupeGuru from deleting not only duplicate files, but their reference. You sure don't want that, do you?
+You can mark duplicate files, but by default you can't mark the reference file of a group. This is a security measure to prevent dupeGuru from deleting not only duplicate files, but their reference. You sure don't want that, do you?
+
+When every file of a group has to go, turn on **Allow marking reference files** in the advanced preferences. Reference files then get a mark box too, and a marked reference is shown struck through. You mark a reference by clicking its mark box, or by selecting it and pressing **space**. **Mark All** and **Invert Marking** still leave references alone, and **Mark None** unmarks them. A file from a reference folder can never be marked. Before deleting, moving or copying marked files that include references, dupeGuru asks for confirmation, and deleted files can't be replaced with links while references are marked. When a reference is deleted or moved, the next file of its group takes the reference position, unmarked.
 
 What determines which files are reference and which files are duplicates is first their folder state. A file from a reference folder will always be reference in a duplicate group. If all files are from a normal folder, the size determine which file will be the reference of a duplicate group. dupeGuru assumes that you always want to keep the biggest file, so the biggest files will take the reference position.
 
@@ -163,7 +165,8 @@ Action Menu
     Open the folder containing selected file.
 **Invoke Custom Command:**
     Invokes the external application you've set up in your preferences using the current selection
-    as arguments in the invocation.
+    as arguments in the invocation. If the selection includes reference files, for which **%d** and
+    **%r** are the same file, dupeGuru asks for confirmation first.
 **Rename Selected:**
     Prompts you for a new name, and then rename the selected file.
 

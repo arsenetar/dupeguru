@@ -11,6 +11,7 @@ import re
 import os
 import os.path as op
 from errno import EISDIR, EACCES
+from typing import List
 from xml.etree import ElementTree as ET
 
 from hscommon.jobprogress.job import nulljob
@@ -19,6 +20,7 @@ from hscommon.util import flatten, nonone, FileOrPath, format_size
 from hscommon.trans import tr
 
 from core import engine
+from core.fs import File
 from core.markable import Markable
 
 
@@ -48,6 +50,9 @@ class Results(Markable):
         self.__filters = None
         self.__filtered_dupes = None
         self.__filtered_groups = None
+        # Marked references are kept apart from Markable's marks so that Mark All, Invert Marking
+        # and marking the selection never mark a reference: only marking that one file does.
+        self.__marked_refs = set()
         self.__recalculate_stats()
         self.__marked_size = 0
         self.app = app
@@ -91,8 +96,10 @@ class Results(Markable):
     def mark_none(self):
         if self.__filters:
             self.unmark_multiple(self.__filtered_dupes)
+            self.__marked_refs -= self.__filtered_dupes
         else:
             Markable.mark_none(self)
+            self.__marked_refs = set()
 
     # ---Private
     def __get_dupe_list(self):
@@ -138,6 +145,12 @@ class Results(Markable):
             format_size(marked_size, 2),
             format_size(total_size, 2),
         )
+        marked_refs = self.marked_refs
+        if marked_refs:
+            result += tr(" Reference files marked: %d (%s).") % (
+                len(marked_refs),
+                format_size(sum(ref.size for ref in marked_refs), 2),
+            )
         if self.__filters:
             result += tr(" filter: %s") % " --> ".join(self.__filters)
         return result
@@ -152,6 +165,7 @@ class Results(Markable):
 
     def __set_groups(self, new_groups):
         self.mark_none()
+        self.__marked_refs = set()
         self.__groups = new_groups
         self.__group_of_duplicate = {}
         for g in self.__groups:
@@ -211,6 +225,61 @@ class Results(Markable):
             return None
 
     is_markable = _is_markable
+
+    def is_ref_markable(self, file: File) -> bool:
+        """Whether ``file`` is a group's reference that can be marked.
+
+        Only with the ``allow_marking_refs`` option on, and never for a file from a reference
+        folder (``is_ref``), whose folder state says it must not be deleted.
+        """
+        if not self.app.options.get("allow_marking_refs", False):
+            return False
+        if file.is_ref:
+            return False
+        g = self.get_group_of_duplicate(file)
+        if not g or file is not g.ref:
+            return False
+        if self.__filtered_dupes and file not in self.__filtered_dupes:
+            return False
+        return True
+
+    def is_ref_marked(self, file: File) -> bool:
+        """Whether ``file`` is a marked reference. A mark is valid only while the file is still
+        its group's reference."""
+        return file in self.__marked_refs and self.is_ref_markable(file)
+
+    def mark_ref(self, file: File) -> bool:
+        if not self.is_ref_markable(file):
+            return False
+        self.__marked_refs.add(file)
+        return True
+
+    def unmark_ref(self, file: File) -> bool:
+        if file not in self.__marked_refs:
+            return False
+        self.__marked_refs.discard(file)
+        return True
+
+    def forget_moved_ref_marks(self) -> None:
+        """Drop the marks of files that are no longer their group's reference.
+
+        Without this, a reference that was marked, lost its position, then got it back, would be
+        marked again without anyone having asked for it.
+        """
+        groups = {f: self.get_group_of_duplicate(f) for f in self.__marked_refs}
+        self.__marked_refs = {f for f, g in groups.items() if g is not None and g.ref is f}
+
+    @property
+    def marked_refs(self) -> List[File]:
+        """The marked references, in :attr:`groups` order."""
+        if not self.__marked_refs:
+            return []
+        return [g.ref for g in self.groups if g.ref is not None and self.is_ref_marked(g.ref)]
+
+    @property
+    def marked_file_count(self) -> int:
+        """How many files the actions on marked files act on: marked duplicates and references."""
+        return self.mark_count + len(self.marked_refs)
 
     def load_from_xml(self, infile, get_file, j=nulljob):
         """Load results from ``infile``.
@@ -276,6 +345,7 @@ class Results(Markable):
         if not g.switch_ref(dupe):
             return False
         self._remove_mark_flag(dupe)
+        self.__marked_refs.discard(r)
         if not r.is_ref:
             self.__total_count += 1
             self.__total_size += r.size
@@ -287,7 +357,7 @@ class Results(Markable):
         return True
 
     def perform_on_marked(self, func, remove_from_results):
-        """Performs ``func`` on all marked dupes.
+        """Performs ``func`` on all marked dupes, then on all marked references.
 
         If an ``EnvironmentError`` is raised during the call, the problematic dupe is added to
         self.problems.
@@ -297,7 +367,8 @@ class Results(Markable):
         """
         self.problems = []
         to_remove = []
-        marked = (dupe for dupe in self.dupes if self.is_marked(dupe))
+        marked_refs = self.marked_refs
+        marked = [dupe for dupe in self.dupes if self.is_marked(dupe)] + marked_refs
         for dupe in marked:
             try:
                 func(dupe)
@@ -305,10 +376,48 @@ class Results(Markable):
             except (OSError, UnicodeEncodeError) as e:
                 self.problems.append((dupe, str(e)))
         if remove_from_results:
-            self.remove_duplicates(to_remove)
+            refs = set(marked_refs)
+            # The duplicates go first: a reference's removal can dissolve its group.
+            self.remove_duplicates([f for f in to_remove if f not in refs])
+            self.__remove_refs([f for f in to_remove if f in refs])
             self.mark_none()
             for dupe, _ in self.problems:
-                self.mark(dupe)
+                if dupe in refs:
+                    self.mark_ref(dupe)
+                else:
+                    # A duplicate that took the place of a removed reference stays unmarked.
+                    self.mark(dupe)
+
+    def __remove_refs(self, refs: List[File]) -> None:
+        """Remove references from their groups; the first duplicate of each takes the reference
+        position. A group left with a single file is removed."""
+        if not refs:
+            return
+        affected_groups = set()
+        for ref in refs:
+            group = self.get_group_of_duplicate(ref)
+            if group is None or group.ref is not ref:
+                continue  # its group went with its last duplicate
+            others = group.dupes
+            group.remove_dupe(ref, False)
+            del self.__group_of_duplicate[ref]
+            self.__marked_refs.discard(ref)
+            if group:
+                self._remove_mark_flag(group.ref)
+                affected_groups.add(group)
+            else:
+                for f in others:
+                    del self.__group_of_duplicate[f]
+                    self._remove_mark_flag(f)
+                self.__groups.remove(group)
+                if self.__filtered_groups:
+                    self.__filtered_groups.remove(group)
+                affected_groups.discard(group)
+        for group in affected_groups:
+            group.discard_matches()
+        self.__recalculate_stats()
+        self.__dupes = None
+        self.is_modified = bool(self.__groups)
 
     def remove_duplicates(self, dupes):
         """Remove ``dupes`` from their respective :class:`~core.engine.Group`.
