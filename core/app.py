@@ -182,7 +182,10 @@ class DupeGuru(Broadcaster):
         self.view.create_results_window()
 
     def _get_picture_cache_path(self):
-        cache_name = "cached_pictures.db"
+        prescale = self.options.get("picture_prescale", 1)
+        # Balanced (1) = no suffix for backward compat with existing caches
+        suffixes = ["_accurate", "", "_turbo"]
+        cache_name = f"cached_pictures{suffixes[prescale]}.db"
         return op.join(self.appdata, cache_name)
 
     def _get_dupe_sort_key(self, dupe, get_group, key, delta):

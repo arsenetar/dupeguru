@@ -89,7 +89,7 @@ class PreferencesDialog(PreferencesDialogBase):
             ScanType.TAG,
         )
         tag_based = scan_type == ScanType.TAG
-        self.filterHardnessSlider.setEnabled(word_based)
+        self._setFilterHardnessEnabled(word_based)
         self.matchSimilarBox.setEnabled(word_based)
         self.wordWeightingBox.setEnabled(word_based)
         self.tagTrackBox.setEnabled(tag_based)
