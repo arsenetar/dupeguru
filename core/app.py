@@ -43,6 +43,7 @@ DEBUG_MODE_PREFERENCE = "DebugMode"
 
 MSG_NO_MARKED_DUPES = tr("There are no marked duplicates. Nothing has been done.")
 MSG_NO_SELECTED_DUPES = tr("There are no selected duplicates. Nothing has been done.")
+MSG_NOT_IN_DIRECTORIES = tr("The file is not under any folder in the Directories panel. Can't recreate relative path.")
 MSG_MANY_FILES_TO_OPEN = tr(
     "You're about to open many files at once. Depending on what those "
     "files are opened with, doing so can create quite a mess. Continue?"
@@ -434,6 +435,10 @@ class DupeGuru(Broadcaster):
             # no filename, no windows drive letter
             source_base = source_path.relative_to(source_path.anchor).parent
             if dest_type == DestType.RELATIVE:
+                if location_path is None:
+                    # The dupe isn't under any folder in the Directories panel (e.g. results were loaded from a
+                    # file after the folder list changed), so there's no root to make the path relative to.
+                    raise OSError(MSG_NOT_IN_DIRECTORIES)
                 source_base = source_base.relative_to(location_path.relative_to(location_path.anchor))
             dest_path = dest_path.joinpath(source_base)
         if not dest_path.exists():
