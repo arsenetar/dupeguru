@@ -52,8 +52,8 @@ msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
 msgstr ""
-"Une action précédente est encore en cours. Attendez quelques secondes avant "
-"d'en repartir une nouvelle."
+"Une action précédente est encore en cours. Vous ne pouvez pas encore en démarrer une nouvelle. "
+"Attendez quelques secondes et essayer à nouveau."
 
 #: core\app.py:300
 msgid "No duplicates found."
@@ -69,7 +69,7 @@ msgstr "Tous les fichiers marqués ont été déplacés correctement."
 
 #: core\app.py:319
 msgid "All marked files were deleted successfully."
-msgstr ""
+msgstr "Tous les fichiers marqués ont bien été supprimés."
 
 #: core\app.py:321
 msgid "All marked files were successfully sent to Trash."
@@ -137,11 +137,11 @@ msgstr "%s (%d hors-groupe)"
 
 #: core\directories.py:191
 msgid "Collected {} files to scan"
-msgstr ""
+msgstr "{} fichiers collectés pour scanner"
 
 #: core\directories.py:207
 msgid "Collected {} folders to scan"
-msgstr ""
+msgstr "{} dossiers collectés pour scanner"
 
 #: core\engine.py:27
 msgid "%d matches found from %d groups"
@@ -183,7 +183,7 @@ msgstr "Contenu"
 
 #: core\pe\matchblock.py:66
 msgid "Analyzed %d/%d pictures"
-msgstr "Analyzé %d/%d images"
+msgstr "Analysé %d/%d images"
 
 #: core\pe\matchblock.py:183
 msgid "Performed %d/%d chunk matches"
@@ -215,7 +215,7 @@ msgstr "Chiffres à la fin"
 
 #: core\prioritize.py:103
 msgid "Doesn't end with number"
-msgstr "Pas de chiffres à la finr"
+msgstr "Pas de chiffres à la fin"
 
 #: core\prioritize.py:104
 msgid "Longest"
