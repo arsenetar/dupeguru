@@ -421,6 +421,67 @@ class TestCaseDupeGuruWithResults:
         # don't crash
 
 
+    def test_invoke_custom_command_uses_marked_dupes_and_continues_after_failure(self, do_setup, monkeypatch):
+        # Delete checkmarks, not the blue selection. A non-zero exit must not abort the rest,
+        # and rows must stay in the result list.
+        app = self.app
+        objects = self.objects
+        dupe_count = len(app.results.dupes)
+        group_count = len(app.results.groups)
+        self.rtable.select([2])  # blue-select "foo bleh"; it is not marked
+        assert not app.results.mark(objects[0])  # reference is not markable
+        app.results.mark(objects[1])  # "bar bleh"
+        app.results.mark(objects[4])  # second group dupe
+
+        def get_default(key):
+            if key == "CustomCommand":
+                return 'echo "%d" "%r"'
+            return None
+
+        app.view.get_default = get_default
+        calls = []
+
+        class FakePopen:
+            def __init__(self, cmd, **kwargs):
+                calls.append(cmd)
+                self.returncode = 1 if "bar bleh" in cmd else 0
+                self.stdout = self
+
+            def read(self):
+                return b"skip\n" if self.returncode else b"ok\n"
+
+            def wait(self):
+                return self.returncode
+
+        monkeypatch.setattr("core.app.subprocess.Popen", FakePopen)
+        app.invoke_custom_command()
+        eq_(len(calls), 2)
+        assert "bar bleh" in calls[0]
+        assert "foo bar" in calls[0]  # reference, not the blue-selected dupe
+        assert "foo bleh" not in calls[0]
+        assert "foo bleh" not in calls[1]
+        assert any("failed for 1 of 2" in msg for msg in app.view.messages)
+        eq_(len(app.results.dupes), dupe_count)
+        eq_(len(app.results.groups), group_count)
+        assert app.results.is_marked(objects[1])
+        assert app.results.is_marked(objects[4])
+        assert app.selected_dupes == [objects[2]]
+
+    def test_invoke_custom_command_without_marks_does_nothing(self, do_setup, monkeypatch):
+        app = self.app
+        self.rtable.select([1, 2])
+        app.view.get_default = lambda key: "echo %d" if key == "CustomCommand" else None
+        calls = []
+        monkeypatch.setattr(
+            "core.app.subprocess.Popen",
+            lambda *args, **kwargs: calls.append(args) or None,
+        )
+        app.invoke_custom_command()
+        eq_(calls, [])
+        assert any("no marked duplicates" in msg.lower() for msg in app.view.messages)
+        eq_(len(app.results.dupes), 3)
+
+
 class TestCaseDupeGuruRenameSelected:
     @pytest.fixture
     def do_setup(self, request):

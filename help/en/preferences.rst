@@ -69,8 +69,9 @@ filename if the filename already exists in the destination.
     for example, you have a nice diffing application installed.
 
 The format of the command is the same as what you would write in the command line, except that there
-are 2 placeholders: **%d** and **%r**. These placeholders will be replaced by the path of the
-selected dupe (%d) and the path of the selected dupe's reference file (%r).
+are 2 placeholders: **%d** and **%r**. These placeholders will be replaced by the path of each
+marked duplicate (%d) and the path of that duplicate's reference file (%r). The command runs once
+per delete-checkmark, not for the blue row selection, and reference rows are never passed as %d.
 
 If the path to your executable contains space characters, you should enclose it in "" quotes. You
 should also enclose placeholders in quotes because it's very possible that paths to dupes and refs

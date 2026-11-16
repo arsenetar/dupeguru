@@ -8,7 +8,14 @@
 
 from PyQt5.QtCore import Qt, pyqtSignal, QModelIndex
 from PyQt5.QtGui import QBrush, QFont, QFontMetrics
-from PyQt5.QtWidgets import QTableView
+from PyQt5.QtWidgets import (
+    QApplication,
+    QStyle,
+    QStyleFactory,
+    QStyleOptionViewItem,
+    QStyledItemDelegate,
+    QTableView,
+)
 
 from qt.table import Table
 
@@ -105,7 +112,53 @@ class ResultsModel(Table):
         self.view.scroll(0, -1)
 
 
+class MarkedItemDelegate(QStyledItemDelegate):
+    """Draw the delete-mark checkbox with the Fusion indicator.
+
+    Qt 5.15.14's macOS style paints item-view checks only when they are on, and
+    then only as a blue blob. Unchecked marks (the usual state) are invisible.
+    The packaged app's Qt 5.15.2 still draws the box. Fusion's indicator draws
+    both states, so use it for this column only.
+    """
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self._fusion = QStyleFactory.create("Fusion")
+
+    def paint(self, painter, option, index):
+        check = index.data(Qt.CheckStateRole)
+        if check is None or self._fusion is None:
+            super().paint(painter, option, index)
+            return
+        opt = QStyleOptionViewItem(option)
+        self.initStyleOption(opt, index)
+        opt.features &= ~QStyleOptionViewItem.HasCheckIndicator
+        widget = option.widget
+        style = widget.style() if widget is not None else QApplication.style()
+        style.drawControl(QStyle.CE_ItemViewItem, opt, painter, widget)
+
+        check_opt = QStyleOptionViewItem(option)
+        self.initStyleOption(check_opt, index)
+        check_opt.state &= ~(QStyle.State_On | QStyle.State_Off | QStyle.State_NoChange)
+        if check == Qt.Checked:
+            check_opt.state |= QStyle.State_On
+        elif check == Qt.PartiallyChecked:
+            check_opt.state |= QStyle.State_NoChange
+        else:
+            check_opt.state |= QStyle.State_Off
+        check_opt.rect = self._fusion.subElementRect(
+            QStyle.SE_ItemViewItemCheckIndicator, check_opt, widget
+        )
+        self._fusion.drawPrimitive(QStyle.PE_IndicatorItemViewItemCheck, check_opt, painter, widget)
+
+
 class ResultsView(QTableView):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        # See MarkedItemDelegate. Installed for every column; it only custom-paints
+        # cells that expose CheckStateRole (the mark column).
+        self.setItemDelegate(MarkedItemDelegate(self))
+
     # --- Override
     def keyPressEvent(self, event):
         if event.text() == " ":
