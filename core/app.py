@@ -9,8 +9,8 @@ import datetime
 import os
 import os.path as op
 import logging
+import shlex
 import subprocess
-import re
 import shutil
 from pathlib import Path
 
@@ -544,24 +544,22 @@ class DupeGuru(Broadcaster):
         dupes = self.selected_dupes
         refs = [self.results.get_group_of_duplicate(dupe).ref for dupe in dupes]
         for dupe, ref in zip(dupes, refs):
-            dupe_cmd = cmd.replace("%d", str(dupe.path))
-            dupe_cmd = dupe_cmd.replace("%r", str(ref.path))
-            match = re.match(r'"([^"]+)"(.*)', dupe_cmd)
-            if match is not None:
-                # This code here is because subprocess. Popen doesn't seem to accept, under Windows,
-                # executable paths with spaces in it, *even* when they're enclosed in "". So this is
-                # a workaround to make the damn thing work.
-                exepath, args = match.groups()
-                path, exename = op.split(exepath)
-                p = subprocess.Popen(
-                    exename + args, shell=True, cwd=path, stdout=subprocess.PIPE, stderr=subprocess.STDOUT
-                )
+            # Tokenize the command template safely before substituting paths
+            try:
+                cmd_parts = shlex.split(cmd)
+            except ValueError as e:
+                logging.error("Invalid custom command syntax: %s", e)
+                self.view.show_message(tr("Invalid custom command syntax: {}").format(str(e)))
+                return
+            # Replace placeholders in each token individually to prevent injection
+            cmd_parts = [part.replace("%d", str(dupe.path)).replace("%r", str(ref.path)) for part in cmd_parts]
+            try:
+                p = subprocess.Popen(cmd_parts, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
                 output = p.stdout.read()
-                logging.info("Custom command %s %s: %s", exename, args, output)
-            else:
-                p = subprocess.Popen(dupe_cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-                output = p.stdout.read()
-                logging.info("Custom command %s: %s", dupe_cmd, output)
+                logging.info("Custom command %s: %s", cmd_parts, output)
+            except OSError as e:
+                logging.error("Failed to execute custom command %s: %s", cmd_parts, e)
+                self.view.show_message(tr("Failed to execute custom command: {}").format(str(e)))
 
     def load(self):
         """Load directory selection and ignore list from files in appdata.
