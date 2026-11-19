@@ -112,6 +112,9 @@ class FilesDB:
         ON CONFLICT(path) DO UPDATE SET size=:size, mtime_ns=:mtime_ns, entry_dt=datetime('now'), {key}=:value;
     """
 
+    # Whitelist of valid column names to prevent SQL injection via .format(key=key)
+    VALID_KEYS = {"digest", "digest_partial", "digest_samples"}
+
     ignore_mtime = False
 
     def __init__(self):
@@ -150,6 +153,8 @@ class FilesDB:
             conn.execute(self.create_table_query)
 
     def get(self, path: Path, key: str) -> Union[bytes, None]:
+        if key not in self.VALID_KEYS:
+            raise ValueError(f"Invalid cache key: {key}")
         stat = path.stat()
         size = stat.st_size
         mtime_ns = stat.st_mtime_ns
@@ -175,6 +180,8 @@ class FilesDB:
         return None
 
     def put(self, path: Path, key: str, value: Any) -> None:
+        if key not in self.VALID_KEYS:
+            raise ValueError(f"Invalid cache key: {key}")
         stat = path.stat()
         size = stat.st_size
         mtime_ns = stat.st_mtime_ns
