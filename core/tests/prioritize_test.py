@@ -11,6 +11,7 @@ from itertools import combinations
 
 from core.tests.base import TestApp, NamedObject, with_app, eq_
 from core.engine import Group, Match
+from core.prioritize import natural_sort_key
 
 no = NamedObject
 
@@ -203,3 +204,79 @@ def test_longest_filename_prioritization(app):
     app.add_pri_criterion("Filename", 2)  # Longest
     app.pdialog.perform_reprioritization()
     eq_(app.rtable[0].data["name"], "loooongest.ext")
+
+
+# ---
+def app_with_names_in_mixed_case():
+    dupes = [
+        [no("b.ext"), no("C.ext"), no("a.ext")],
+    ]
+    return app_with_dupes(dupes)
+
+
+@with_app(app_with_names_in_mixed_case)
+def test_a_to_z_filename_prioritization(app):
+    # Case is ignored: "C" sorts after "a" and "b".
+    app.add_pri_criterion("Filename", 6)  # A to Z
+    app.pdialog.perform_reprioritization()
+    eq_(app.rtable[0].data["name"], "a.ext")
+
+
+@with_app(app_with_names_in_mixed_case)
+def test_z_to_a_filename_prioritization(app):
+    app.add_pri_criterion("Filename", 7)  # Z to A
+    app.pdialog.perform_reprioritization()
+    eq_(app.rtable[0].data["name"], "C.ext")
+
+
+# ---
+def app_with_names_differing_by_extension():
+    dupes = [
+        [no("a.ext1"), no("b.ext1"), no("b.ext2")],
+    ]
+    return app_with_dupes(dupes)
+
+
+@with_app(app_with_names_differing_by_extension)
+def test_z_to_a_tie_goes_to_the_next_criterion(app):
+    # Without their extension, "b.ext1" and "b.ext2" have the same name: the Kind criterion
+    # picks between them.
+    app.add_pri_criterion("Filename", 7)  # Z to A
+    app.add_pri_criterion("Kind", 1)  # ext2
+    app.pdialog.perform_reprioritization()
+    eq_(app.rtable[0].data["name"], "b.ext2")
+
+
+# ---
+def app_with_numbered_names():
+    dupes = [
+        [no("file9.ext"), no("file10.ext"), no("file2.ext")],
+    ]
+    return app_with_dupes(dupes)
+
+
+@with_app(app_with_numbered_names)
+def test_a_to_z_filename_compares_digits_as_text(app):
+    app.add_pri_criterion("Filename", 6)  # A to Z
+    app.pdialog.perform_reprioritization()
+    eq_(app.rtable[0].data["name"], "file10.ext")
+
+
+@with_app(app_with_numbered_names)
+def test_natural_a_to_z_filename_prioritization(app):
+    app.add_pri_criterion("Filename", 8)  # A to Z, natural order
+    app.pdialog.perform_reprioritization()
+    eq_(app.rtable[0].data["name"], "file2.ext")
+
+
+@with_app(app_with_numbered_names)
+def test_natural_z_to_a_filename_prioritization(app):
+    app.add_pri_criterion("Filename", 9)  # Z to A, natural order
+    app.pdialog.perform_reprioritization()
+    eq_(app.rtable[0].data["name"], "file10.ext")
+
+
+def test_natural_sort_key():
+    # "²" is a digit to str.isdigit(), but not one int() can read.
+    names = ["file10", "File2", "file1", "10", "a", "file1b", "1²2"]
+    eq_(sorted(names, key=natural_sort_key), ["1²2", "10", "a", "file1", "file1b", "File2", "file10"])
