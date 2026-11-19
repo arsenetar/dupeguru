@@ -93,8 +93,8 @@ msgid ""
 "Instead of sending files to trash, delete them directly. This option is "
 "usually used as a workaround when the normal deletion method doesn't work."
 msgstr ""
-"Удалить файлы с диска вместо отправки в Корзину. Используйте если нормальный"
-" метод удаления не работает."
+"Удалить файлы с диска вместо отправки в Корзину. Используйте, если нормальный "
+"метод удаления не работает."
 
 #: qt/deletion_options.py:59 cocoa/en.lproj/Localizable.strings:0
 msgid "Proceed"
@@ -189,7 +189,7 @@ msgstr "Несохранённые результаты"
 
 #: qt/directories_dialog.py:231 cocoa/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to quit?"
-msgstr "Имеются несохранённые результаты, вы действительно хотите выйти?"
+msgstr "Имеются несохранённые результаты, Вы действительно хотите выйти?"
 
 #: qt/directories_dialog.py:239 cocoa/en.lproj/Localizable.strings:0
 msgid "Select a folder to add to the scanning list"
@@ -205,7 +205,7 @@ msgstr "Все файлы (*.*)"
 
 #: qt/directories_dialog.py:267 qt/result_window.py:311
 msgid "dupeGuru Results (*.dupeguru)"
-msgstr "Результаты dupeGuru (*. dupeguru)"
+msgstr "Результаты dupeGuru (*.dupeguru)"
 
 #: qt/directories_dialog.py:278
 msgid "Start a new scan"
@@ -213,7 +213,7 @@ msgstr "Начать новую проверку"
 
 #: qt/directories_dialog.py:279 cocoa/en.lproj/Localizable.strings:0
 msgid "You have unsaved results, do you really want to continue?"
-msgstr "Имеются несохранённые результаты, вы действительно хотите продолжить?"
+msgstr "Имеются несохранённые результаты, Вы действительно хотите продолжить?"
 
 #: qt/directories_model.py:23 cocoa/en.lproj/Localizable.strings:0
 msgid "Name"
@@ -256,7 +256,7 @@ msgstr "Теги для проверки:"
 
 #: qt/me/preferences_dialog.py:36 cocoa/en.lproj/Localizable.strings:0
 msgid "Track"
-msgstr "Трек"
+msgstr "Дорожка"
 
 #: qt/me/preferences_dialog.py:38 cocoa/en.lproj/Localizable.strings:0
 msgid "Artist"
@@ -323,7 +323,7 @@ msgstr "Уровень фильтрации:"
 
 #: qt/preferences_dialog.py:69
 msgid "More Results"
-msgstr "Дополнительные результаты"
+msgstr "Больше результатов"
 
 #: qt/preferences_dialog.py:74
 msgid "Fewer Results"
@@ -379,7 +379,7 @@ msgstr ""
 
 #: qt/problem_dialog.py:33 cocoa/en.lproj/Localizable.strings:0
 msgid "Problems!"
-msgstr "Проблемка!"
+msgstr "Проблема!"
 
 #: qt/problem_dialog.py:37 cocoa/en.lproj/Localizable.strings:0
 msgid ""
@@ -409,15 +409,15 @@ msgstr "Показать значения разницы"
 
 #: qt/result_window.py:60
 msgid "Send Marked to Recycle Bin..."
-msgstr "Переместить отмеченные в Корзину…"
+msgstr "Переместить отмеченные в Корзину..."
 
 #: qt/result_window.py:61 cocoa/en.lproj/Localizable.strings:0
 msgid "Move Marked to..."
-msgstr "Переместить отмеченные в…"
+msgstr "Переместить отмеченные в..."
 
 #: qt/result_window.py:62 cocoa/en.lproj/Localizable.strings:0
 msgid "Copy Marked to..."
-msgstr "Скопировать отмеченные в…"
+msgstr "Скопировать отмеченные в..."
 
 #: qt/result_window.py:63 cocoa/en.lproj/Localizable.strings:0
 msgid "Remove Marked from Results"
@@ -477,7 +477,7 @@ msgstr "Экспорт в CSV"
 
 #: qt/result_window.py:89 cocoa/en.lproj/Localizable.strings:0
 msgid "Save Results..."
-msgstr "Сохранить результаты…"
+msgstr "Сохранить результаты..."
 
 #: qt/result_window.py:90 cocoa/en.lproj/Localizable.strings:0
 msgid "Invoke Custom Command"
@@ -509,15 +509,15 @@ msgstr "Значения разницы"
 
 #: qt/result_window.py:310 cocoa/en.lproj/Localizable.strings:0
 msgid "Select a file to save your results to"
-msgstr "Выберите файл, чтобы сохранить ваши результаты"
+msgstr "Выберите файл для сохранения Ваших результатов"
 
 #: qt/se/preferences_dialog.py:41
 msgid "Ignore files smaller than"
-msgstr "Игнорировать файлы меньше чем"
+msgstr "Игнорировать файлы меньше, чем"
 
 #: qt/se/preferences_dialog.py:52 cocoa/en.lproj/Localizable.strings:0
 msgid "KB"
-msgstr "КБ"
+msgstr "кБ"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "%@ Results"
@@ -549,7 +549,7 @@ msgstr "Все на передний план"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Check for update..."
-msgstr "Проверка обновлений…"
+msgstr "Проверка обновлений..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Close Window"
@@ -594,7 +594,7 @@ msgstr "Настройки dupeGuru"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru Results"
-msgstr "Результаты dupeGuru "
+msgstr "Результаты dupeGuru"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "dupeGuru Website"
@@ -626,7 +626,7 @@ msgstr "Уровень фильтрации:"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Filter Results..."
-msgstr "Отфильтровать результаты…"
+msgstr "Отфильтровать результаты..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Folder Selection Window"
@@ -646,11 +646,11 @@ msgstr "Скрыть остальные"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Ignore files smaller than:"
-msgstr "Пропускать файлы меньше чем:"
+msgstr "Пропускать файлы меньше, чем:"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Load from file..."
-msgstr "Загрузить из файла…"
+msgstr "Загрузить из файла..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Minimize"
@@ -674,7 +674,7 @@ msgstr "Вставить"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Preferences..."
-msgstr "Настройки…"
+msgstr "Настройки..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Quick Look"
@@ -686,7 +686,7 @@ msgstr "Выйти из dupeGuru"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Reset to Default"
-msgstr "Восстановить значения по умолчанию"
+msgstr "Восстановить значение по умолчанию"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Reset To Defaults"
@@ -706,7 +706,7 @@ msgstr "Выбрать все"
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Send Marked to Trash..."
-msgstr "Переместить отмеченные в Корзину…"
+msgstr "Переместить отмеченные в Корзину..."
 
 #: cocoa/en.lproj/Localizable.strings:0
 msgid "Services"
@@ -754,11 +754,11 @@ msgstr "Выберите файл каталогов для загрузки"
 
 #: qt\directories_dialog.py:338
 msgid "dupeGuru Results (*.dupegurudirs)"
-msgstr "Каталоги dupeGuru (*.dupegurudirs)"
+msgstr "Результаты dupeGuru (*.dupegurudirs)"
 
 #: qt\directories_dialog.py:347
 msgid "Select a file to save your directories to"
-msgstr "Выберите файл для сохранения каталогов"
+msgstr "Выберите файл для сохранения Ваших каталогов"
 
 #: qt\directories_dialog.py:348
 msgid "dupeGuru Directories (*.dupegurudirs)"
@@ -798,7 +798,7 @@ msgstr ""
 
 #: qt\exclude_list_table.py:36
 msgid "Compilation error: "
-msgstr "Ошибка компиляции:"
+msgstr "Ошибка компиляции: "
 
 #: qt\pe\image_viewer.py:56
 msgid "Increase zoom"
@@ -835,7 +835,7 @@ msgstr "Переопределить значки темы на панели и�
 #: qt\pe\preferences_dialog.py:58
 msgid ""
 "Use our own internal icons instead of those provided by the theme engine"
-msgstr "Используйте внутренние значки вместо значков, встроенных в тему"
+msgstr "Использовать наши внутренние значки вместо значков, встроенных в тему"
 
 #: qt\pe\preferences_dialog.py:66
 msgid "Show scrollbars in image viewers"
@@ -965,7 +965,7 @@ msgstr ""
 
 #: qt\se\preferences_dialog.py:68
 msgid "Ignore files larger than"
-msgstr "Игнорировать файлы больше чем"
+msgstr "Игнорировать файлы больше, чем"
 
 #: qt\app.py:135 qt\app.py:293
 msgid "Clear Cache"
@@ -981,7 +981,7 @@ msgstr ""
 
 #: qt\app.py:299
 msgid "Cache cleared."
-msgstr "Кэш очищен "
+msgstr "Кэш очищен."
 
 #: qt\preferences_dialog.py:173
 msgid "Use dark style"
@@ -994,8 +994,7 @@ msgstr "Сохранить профиль сканирования"
 #: qt\preferences_dialog.py:242
 msgid "Profile the scan operation and save logs for optimization."
 msgstr ""
-"В папке установленной или портативной программы, есть папка Data в которую "
-"сохраняется логи и файл с раширением *.profile для оптимизации."
+"Настройте операцию сканирования и сохраните журналы для оптимизации."
 
 #: qt\preferences_dialog.py:246
 msgid "Logs located in: <a href=\"{}\">{}</a>"
@@ -1023,11 +1022,11 @@ msgstr "Под лицензией GPLv3"
 
 #: qt\about_box.py:68
 msgid "No update available."
-msgstr "У вас самая свежая версия"
+msgstr "Обновления недоступны."
 
 #: qt\about_box.py:71
 msgid "New version {} available, download <a href=\"{}\">here</a>."
-msgstr "Обнаружена новая {} версия, загружать <a href=\"{}\">тут</a>."
+msgstr "Обнаружена новая {} версия, загрузить <a href=\"{}\">тут</a>."
 
 #: qt\error_report_dialog.py:50
 msgid "Error Report"
