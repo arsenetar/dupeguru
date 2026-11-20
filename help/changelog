@@ -1,3 +1,8 @@
+=== 4.3.1^20261116git (2026-11-16)
+* Add bulk folder-state changes using Ctrl/Shift selection
+* Preserve selected rows and expanded folders when changing Normal, Reference, or Excluded
+* Add tested Windows installer and portable release builds
+
 === 4.3.1^20261101git (2026-11-01)
 * cleanup packaging requirements, remove references to OSX cocoa
 * remove obsolete hscommon license file

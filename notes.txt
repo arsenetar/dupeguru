@@ -32,8 +32,12 @@ PR1437 - fix: Select the revealed file even in a folder Explorer has not listed
 git c16d627 - cleanup 2015 license change from BSD to GPLv3
 git 81ecf63 - cleanup packaging requirements, remove references to OSX cocoa
 git 788503e - remove reference to obsolete OSX cocoa version
+git 85c382c - gunnerman1/dupeguru - feat: Apply folder states to selected rows and add Windows release
+git e42dd4e - gunnerman1/dupeguru - build: Enable portable settings
+git 8c10eda - gunnerman1/dupeguru - build: Verify packaged Qt startup without visible window handles
 
-Other interesting github dupeguru forks:
+
+Other github dupeguru forks with recent activity:
 
 marcmy/dupeguru - 53 commits ahead, needs to be considered.
 
@@ -42,8 +46,6 @@ as 4.21.0
 
 manrajidevi91/dupeguru - A web/server based project, not a desktop
 app.
-
-gunnerman1/dupeguru - 3 commits that could be merged here.
 
 Ikkoru/dupeguru - all the changes here have been submitted as PRs to
 arsenetar.

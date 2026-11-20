@@ -1,5 +1,13 @@
 ## How to build dupeGuru for Windows
 
+### Github workflow
+
+The Github workflow can build the Windows installer, and that is probably easier
+than following the directions below.
+
+Download the Windows 64-bit installer, or extract the portable ZIP and run dupeguru-win64.exe.
+The portable ZIP includes the complete application folder; Python is not required.
+
 ### Prerequisites
 
 - [Python 3.7+][python]

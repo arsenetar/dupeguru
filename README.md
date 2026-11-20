@@ -1,38 +1,37 @@
 # dupeGuru
 
-[dupeGuru][dupeguru] is a cross-platform (Linux, OS X, Windows) GUI tool to find duplicate files in
+dupeGuru is a cross-platform (Linux, OS X, Windows) GUI tool to find duplicate files in
 a system. It is written mostly in Python 3 and uses [qt](https://www.qt.io/) for the UI.
 
 ## Current status
 Still looking for additional help especially with regards to:
 * OSX maintenance: reproducing bugs, packaging verification.
-* Linux maintenance: reproducing bugs, maintaining PPA repository, Debian package, rpm package.
-* Translations: updating missing strings, transifex project at https://www.transifex.com/voltaicideas/dupeguru-1
+* Linux maintenance: reproducing bugs, maintaining PPA repository, Debian package.
 * Documentation: keeping it up-to-date.
 
 ## Contents of this folder
 
-This folder contains the source for dupeGuru. Its documentation is in `help`, but is also
-[available online][documentation] in its built form. Here's how this source tree is organized:
+This folder contains the source for dupeGuru. Its documentation is in `help`
+Here's how this source tree is organized:
 
-* core: Contains the core logic code for dupeGuru. It's Python code.
-* qt: UI code for the Qt toolkit. It's written in Python and uses PyQt.
+* dupeguru/core: Contains the core logic code for dupeGuru. It's Python code.
+* dupeguru/qt: UI code for the Qt toolkit. It's written in Python and uses PyQt.
 * images: Images used by the different UI codebases.
 * pkg: Skeleton files required to create different packages
 * help: Help document, written for Sphinx.
 * locale: .po files for localization.
-* hscommon: A collection of helpers used across HS applications.
+* dupeguru/hscommon: A collection of helpers used across HS applications.
 
 ## How to build dupeGuru from source
 
 ### Windows & macOS specific additional instructions
 For windows instructions see the [Windows Instructions](Windows.md).
 
-For macos instructions (qt version) see the [macOS Instructions](macos.md).
+For macos instructions see the [macOS Instructions](macos.md).
 
 ### Prerequisites
 * [Python 3.7+][python]
-* PyQt6
+* [PyQt6][pyqt]
 
 ### System Setup
 When running in a linux based environment the following system packages or equivalents are needed to build:
@@ -84,11 +83,9 @@ run `tox`.
 
 You can also run automated tests without Tox. Extra requirements for running tests are in
 `requirements-extra.txt`. So, you can do `pip install -r requirements-extra.txt` inside your
-virtualenv and then `py.test core hscommon`
+virtualenv and then `py.test dupeguru`
 
-[dupeguru]: https://dupeguru.voltaicideas.net/
 [cross-toolkit]: http://www.hardcoded.net/articles/cross-toolkit-software
-[documentation]: http://dupeguru.voltaicideas.net/help/en/
 [python]: http://www.python.org/
 [pyqt]: http://www.riverbankcomputing.com
 [tox]: https://tox.readthedocs.org/en/latest/
