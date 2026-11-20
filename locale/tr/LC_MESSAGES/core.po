@@ -1,25 +1,32 @@
 # Translators:
-# Ahmet Haydar Işık <itsahmthydr@gmail.com>, 2021
-# Emin Tufan Çetin <etcetin@gmail.com>, 2021
+# carl byington, 2026
 #
 msgid ""
 msgstr ""
-"Last-Translator: Emin Tufan Çetin <etcetin@gmail.com>, 2021\n"
-"Language-Team: Turkish (https://app.transifex.com/voltaicideas/teams/116153/tr/)\n"
+"Last-Translator: carl byington, 2026\n"
+"Language-Team: Turkish (https://app.transifex.com/five-ten-sg/teams/311749/tr/)\n"
 "Language: tr\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: utf-8\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: core\app.py:44
+#: dupeguru/core/app.py:44
 msgid "There are no marked duplicates. Nothing has been done."
 msgstr "İmlenen kopya yok. İşlem yapılmadı."
 
-#: core\app.py:45
+#: dupeguru/core/app.py:45
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr "Seçilen kopya yok. İşlem yapılmadı."
 
-#: core\app.py:46
+#: dupeguru/core/app.py:46
+msgid ""
+"The file is not under any folder in the Directories panel. Can't recreate "
+"relative path."
+msgstr ""
+"Dosya, Dizinler panelindeki hiçbir klasörün altında değil. Göreceli yol "
+"yeniden oluşturulamıyor."
+
+#: dupeguru/core/app.py:47
 msgid ""
 "You're about to open many files at once. Depending on what those files are "
 "opened with, doing so can create quite a mess. Continue?"
@@ -27,27 +34,44 @@ msgstr ""
 "Birden çok dosyayı aynı anda açmaya çalışıyorsunuz. Dosyaların açıldığı "
 "programlara bağlı olarak, bu sorun yaratabilir. Sürdürülsün mü?"
 
-#: core\app.py:73
+#: dupeguru/core/app.py:51
+msgid "{} of the {} marked files are reference files!"
+msgstr "İşaretli {} dosyadan {} tanesi referans dosyasıdır!"
+
+#: dupeguru/core/app.py:52
+msgid "{} of the {} selected files are reference files!"
+msgstr "Seçilen {} dosyadan {} tanesi referans dosyasıdır!"
+
+#: dupeguru/core/app.py:53
+msgid ""
+"Deleted files can't be replaced with links while reference files are marked:"
+" the links would point to files being deleted. Nothing has been done."
+msgstr ""
+"Silinen dosyalar, referans dosyalar işaretliyken bağlantılarla "
+"değiştirilemez: bağlantılar silinmekte olan dosyalara işaret ederdi. Hiçbir "
+"şey yapılmadı."
+
+#: dupeguru/core/app.py:80
 msgid "Scanning for duplicates"
 msgstr "Kopyalar aranıyor"
 
-#: core\app.py:74
+#: dupeguru/core/app.py:81
 msgid "Loading"
 msgstr "Yükleniyor"
 
-#: core\app.py:75
+#: dupeguru/core/app.py:82
 msgid "Moving"
 msgstr "Taşınıyor"
 
-#: core\app.py:76
+#: dupeguru/core/app.py:83
 msgid "Copying"
 msgstr "Kopyalanıyor"
 
-#: core\app.py:77
+#: dupeguru/core/app.py:84
 msgid "Sending to Trash"
 msgstr "Çöpe Gönderiliyor"
 
-#: core\app.py:289
+#: dupeguru/core/app.py:301
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -55,206 +79,251 @@ msgstr ""
 "Önceki işlem hala sürüyor. Yenisini başlatamazsınız. Birkaç saniye bekleyip "
 "yeniden deneyin."
 
-#: core\app.py:300
+#: dupeguru/core/app.py:312
 msgid "No duplicates found."
 msgstr "Kopya bulunamadı."
 
-#: core\app.py:315
+#: dupeguru/core/app.py:327
 msgid "All marked files were copied successfully."
 msgstr "İmlenen tüm dosyalar başarıyla kopyalandı."
 
-#: core\app.py:317
+#: dupeguru/core/app.py:329
 msgid "All marked files were moved successfully."
 msgstr "İmlenen tüm dosyalar başarıyla taşındı."
 
-#: core\app.py:319
+#: dupeguru/core/app.py:331
 msgid "All marked files were deleted successfully."
 msgstr "İmlenen tüm dosyalar başarıyla silindi."
 
-#: core\app.py:321
+#: dupeguru/core/app.py:333
 msgid "All marked files were successfully sent to Trash."
 msgstr "İmlenen tüm dosyalar başarıyla çöpe gönderildi."
 
-#: core\app.py:326
+#: dupeguru/core/app.py:338
 msgid "Could not load file: {}"
 msgstr "Dosya yüklenemedi: {}"
 
-#: core\app.py:382
+#: dupeguru/core/app.py:405
 msgid "'{}' already is in the list."
 msgstr "'{}' çoktan listede."
 
-#: core\app.py:384
+#: dupeguru/core/app.py:408
+msgid ""
+"'{}' could not be read. It might be on a disconnected network share, or you "
+"might not have the permission to access it."
+msgstr ""
+"'{}' okunamadı. Bağlantısı kesilmiş bir ağ paylaşımında olabilir veya bu "
+"konuma erişim izniniz olmayabilir."
+
+#: dupeguru/core/app.py:414
 msgid "'{}' does not exist."
 msgstr "'{}' bulunamadı."
 
-#: core\app.py:392
+#: dupeguru/core/app.py:422
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
 msgstr ""
 "Seçilen %d eşleşmenin tümü sonraki taramalarda göz ardı edilecek. Sürdür?"
 
-#: core\app.py:469
+#: dupeguru/core/app.py:506
 msgid "Select a directory to copy marked files to"
 msgstr "İmlenen dosyaları kopyalamak için dizin seç"
 
-#: core\app.py:471
+#: dupeguru/core/app.py:508
 msgid "Select a directory to move marked files to"
 msgstr "İmlenen dosyaları taşımak için dizin seç"
 
-#: core\app.py:510
+#: dupeguru/core/app.py:554
 msgid "Select a destination for your exported CSV"
 msgstr "Dışa aktarılan CSV'niz için hedef seçin"
 
-#: core\app.py:516 core\app.py:777 core\app.py:787
+#: dupeguru/core/app.py:560 dupeguru/core/app.py:830 dupeguru/core/app.py:840
 msgid "Couldn't write to file: {}"
 msgstr "Dosyaya yazılamadı: {}"
 
-#: core\app.py:539
+#: dupeguru/core/app.py:584
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "Ayarlı özel komutunuz yok. Tercihlerinizden ayarlayınız."
 
-#: core\app.py:701 core\app.py:713
+#: dupeguru/core/app.py:600
+msgid "Invalid custom command syntax: {}"
+msgstr "Geçersiz özel komut sözdizimi: {}"
+
+#: dupeguru/core/app.py:610
+msgid "Failed to execute custom command: {}"
+msgstr "Özel komut yürütülemedi: {}"
+
+#: dupeguru/core/app.py:753 dupeguru/core/app.py:765
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "%d ögeyi sonuçlardan kaldırıyorsunuz. Sürdür?"
 
-#: core\app.py:749
+#: dupeguru/core/app.py:802
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr "{} kopya küme, yeniden önceliklendirme tarafından değiştirildi."
 
-#: core\app.py:797
+#: dupeguru/core/app.py:850
 msgid "The selected directories contain no scannable file."
 msgstr "Seçili dizinler taranabilir dosya içermiyor."
 
-#: core\app.py:813
+#: dupeguru/core/app.py:866
 msgid "Collecting files to scan"
 msgstr "Taranacak dosyalar toplanıyor"
 
-#: core\app.py:863
+#: dupeguru/core/app.py:932
 msgid "%s (%d discarded)"
 msgstr "%s (%d göz ardı edilen)"
 
-#: core\directories.py:191
+#: dupeguru/core/directories.py:227
 msgid "Collected {} files to scan"
 msgstr "Taranacak {} dosya toplandı"
 
-#: core\directories.py:207
+#: dupeguru/core/directories.py:243
 msgid "Collected {} folders to scan"
 msgstr "Taranacak {} klasör toplandı"
 
-#: core\engine.py:27
+#: dupeguru/core/engine.py:27
 msgid "%d matches found from %d groups"
 msgstr "%d eşleşme, %d kümeden"
 
-#: core\gui\deletion_options.py:71
+#: dupeguru/core/gui/deletion_options.py:71
 msgid "You are sending {} file(s) to the Trash."
 msgstr "{} dosyayı Çöp'e gönderiyorsunuz."
 
-#: core\gui\exclude_list_table.py:14
+#: dupeguru/core/gui/exclude_list_table.py:14
 msgid "Regular Expressions"
 msgstr "Düzenli İfadeler"
 
-#: core\gui\ignore_list_dialog.py:25
+#: dupeguru/core/gui/ignore_list_dialog.py:25
 msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr ""
 "%d ögenin tümünü göz ardı edilenler listesinden kaldırmak istiyor musunuz?"
 
-#: core\me\scanner.py:20 core\se\scanner.py:16
+#: dupeguru/core/me/scanner.py:20 dupeguru/core/se/scanner.py:16
 msgid "Filename"
 msgstr "Dosya adı"
 
-#: core\me\scanner.py:21
+#: dupeguru/core/me/scanner.py:21
 msgid "Filename - Fields"
 msgstr "Dosya adı - Alanlar"
 
-#: core\me\scanner.py:22
+#: dupeguru/core/me/scanner.py:22
 msgid "Filename - Fields (No Order)"
 msgstr "Dosya Adı - Alanlar (Düzen Yok)"
 
-#: core\me\scanner.py:23
+#: dupeguru/core/me/scanner.py:23
 msgid "Tags"
 msgstr "Etiketler"
 
-#: core\me\scanner.py:24 core\pe\scanner.py:22 core\se\scanner.py:17
+#: dupeguru/core/me/scanner.py:24 dupeguru/core/pe/scanner.py:23
+#: dupeguru/core/se/scanner.py:17
 msgid "Contents"
 msgstr "İçindekiler"
 
-#: core\pe\matchblock.py:66
+#: dupeguru/core/pe/matchblock.py:119
 msgid "Analyzed %d/%d pictures"
 msgstr "%d/%d fotoğraf incelendi"
 
-#: core\pe\matchblock.py:183
+#: dupeguru/core/pe/matchblock.py:217
 msgid "Performed %d/%d chunk matches"
 msgstr "%d/%d yığın eşleşmesi gerçekleştirildi"
 
-#: core\pe\matchblock.py:191
+#: dupeguru/core/pe/matchblock.py:225
 msgid "Preparing for matching"
 msgstr "Eşlemeye hazırlanıyor"
 
-#: core\pe\matchblock.py:240
+#: dupeguru/core/pe/matchblock.py:274
 msgid "Verified %d/%d matches"
 msgstr "%d/%d eşleşme doğrulandı"
 
-#: core\pe\matchexif.py:19
+#: dupeguru/core/pe/matchexif.py:19
 msgid "Read EXIF of %d/%d pictures"
 msgstr "%d/%d fotorğafın EXIF'i okundu"
 
-#: core\pe\scanner.py:23
+#: dupeguru/core/pe/scanner.py:24
 msgid "EXIF Timestamp"
 msgstr "EXIF Zaman damgası"
 
-#: core\prioritize.py:70
+#: dupeguru/core/prioritize.py:103
 msgid "None"
 msgstr "Hiçbiri"
 
-#: core\prioritize.py:102
+#: dupeguru/core/prioritize.py:141
 msgid "Ends with number"
 msgstr "Sayıyla bitenler"
 
-#: core\prioritize.py:103
+#: dupeguru/core/prioritize.py:142
 msgid "Doesn't end with number"
 msgstr "Sayıyla bitmeyenler"
 
-#: core\prioritize.py:104
+#: dupeguru/core/prioritize.py:143
 msgid "Longest"
 msgstr "En uzun"
 
-#: core\prioritize.py:105
+#: dupeguru/core/prioritize.py:144
 msgid "Shortest"
 msgstr "En kısa"
 
-#: core\prioritize.py:142
+#: dupeguru/core/prioritize.py:145
+msgid "Longest Path"
+msgstr "En Uzun Yol"
+
+#: dupeguru/core/prioritize.py:146
+msgid "Shortest Path"
+msgstr "En kısa yol"
+
+#: dupeguru/core/prioritize.py:147
+msgid "A to Z"
+msgstr "A'dan Z'ye"
+
+#: dupeguru/core/prioritize.py:148
+msgid "Z to A"
+msgstr "Z'den A'ya"
+
+#: dupeguru/core/prioritize.py:149
+msgid "A to Z, natural order"
+msgstr "A'dan Z'ye, doğal sıralama"
+
+#: dupeguru/core/prioritize.py:150
+msgid "Z to A, natural order"
+msgstr "Z'den A'ya, doğal sıralama"
+
+#: dupeguru/core/prioritize.py:203
 msgid "Highest"
 msgstr "En yüksek"
 
-#: core\prioritize.py:142
+#: dupeguru/core/prioritize.py:203
 msgid "Lowest"
 msgstr "En düşük"
 
-#: core\prioritize.py:171
+#: dupeguru/core/prioritize.py:232
 msgid "Newest"
 msgstr "En yeni"
 
-#: core\prioritize.py:171
+#: dupeguru/core/prioritize.py:232
 msgid "Oldest"
 msgstr "En eski"
 
-#: core\results.py:135
+#: dupeguru/core/results.py:143
 msgid "%d / %d (%s / %s) duplicates marked."
 msgstr "%d / %d (%s / %s) kopya imlendi."
 
-#: core\results.py:142
+#: dupeguru/core/results.py:151
+msgid " Reference files marked: %d (%s)."
+msgstr " Referans dosyaları işaretlendi: %d (%s)."
+
+#: dupeguru/core/results.py:156
 msgid " filter: %s"
 msgstr "süz: %s"
 
-#: core\scanner.py:114
+#: dupeguru/core/scanner.py:114
 msgid "Read metadata of %d/%d files"
 msgstr "%d/%d dosyanın üst verisi okundu"
 
-#: core\scanner.py:152
+#: dupeguru/core/scanner.py:152
 msgid "Almost done! Fiddling with results..."
 msgstr "Neredeyse bitti! Sonuçlarla uğraşılıyor..."
 
-#: core\se\scanner.py:18
+#: dupeguru/core/se/scanner.py:18
 msgid "Folders"
 msgstr "Dizinler"

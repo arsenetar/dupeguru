@@ -1177,3 +1177,33 @@ msgstr ""
 "Ungkapan nalar python (sensitif huruf) ini akan menapis keluar fail ketika imbasan.<br>Direktori juga akan ada <strong>keadaan lalai</strong> sendiri ditetapkan kepada Dikecualikan dalam tab Direktori jika nama tersebut sepadan dengan salah satu daripada ungkapan nalar yang dipilih.<br>Untuk setiap fail yang terhimpun, dua percubaan akan dilaksanakan untuk menentukan sama ada fail tersebut perlu diabaikan sepenuhnya:<br><li>1. Ungkapan nalar tanpa pemisah laluan di dalamnya akan dibandingkan dengan nama fail sahaja.</li>\n"
 "<li>2. Ungkapan nalar dengan sekurang-kurangnya satu pemisah laluan di dalamnya akan dibandingkan dengan laluan penuh ke fail.</li><br>Contoh: jika anda ingin tapis keluar fail .PNG dari direktori \"My Pictures\" sahaja:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>Anda boleh cuba ungkapan nalar dengan butang \"cuba rentetan\" selepas menampal laluan palsu dalam medan percubaan:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
 "Ungkapan nalar yang terpadan akan ditonjolkan.<br>Sekiranya ada sekurang-kurangnya satu tonjolan, laluan atau nama fail yang dicuba akan diabaikan ketika imbasan.<br><br>Direktori dan fail yang bermula dengan tanda titik '.' ditapis keluar secara lalainya.<br><br>"
+
+#: qt\pe\preferences_dialog.py:24
+msgid "Match pictures of different rotations"
+msgstr ""
+
+#: dupeguru/qt/pe/preferences_dialog.py:33
+msgid "Scan speed:"
+msgstr ""
+
+#: dupeguru/qt/pe/preferences_dialog.py:36
+msgid "Accurate (slow)"
+msgstr ""
+
+#: dupeguru/qt/pe/preferences_dialog.py:37
+msgid "Balanced (recommended)"
+msgstr ""
+
+#: dupeguru/qt/pe/preferences_dialog.py:38
+msgid "Turbo"
+msgstr ""
+
+#: dupeguru/qt/preferences_dialog.py:261
+msgid "Allow marking reference files"
+msgstr ""
+
+#: dupeguru/qt/preferences_dialog.py:263
+msgid ""
+"Reference files get a mark box too, so that a whole group can be deleted.\n"
+"Mark All and Invert Marking still leave them alone, files in reference folders can never be marked, and acting on marked references asks first."
+msgstr ""

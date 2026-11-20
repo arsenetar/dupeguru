@@ -1,27 +1,34 @@
 # Translators:
-# Andrew Senetar <arsenetar@gmail.com>, 2021
-# Fuan <jcfrt@posteo.net>, 2021
+# carl byington, 2026
 #
 msgid ""
 msgstr ""
-"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
-"Language-Team: Vietnamese (https://app.transifex.com/voltaicideas/teams/116153/vi/)\n"
+"Last-Translator: carl byington, 2026\n"
+"Language-Team: Vietnamese (https://app.transifex.com/five-ten-sg/teams/311749/vi/)\n"
 "Language: vi\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: utf-8\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: core\app.py:44
+#: dupeguru/core/app.py:44
 msgid "There are no marked duplicates. Nothing has been done."
 msgstr ""
 "Không có phần đánh dấu nào trùng nhau. Vẫn chưa thực hiện thao tác nào."
 
-#: core\app.py:45
+#: dupeguru/core/app.py:45
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr ""
 "Không có phần đánh dấu nào trùng nhau. Vẫn chưa thực hiện thao tác nào."
 
-#: core\app.py:46
+#: dupeguru/core/app.py:46
+msgid ""
+"The file is not under any folder in the Directories panel. Can't recreate "
+"relative path."
+msgstr ""
+"Tập tin không thuộc thư mục nào trong bảng Thư mục. Không thể tạo lại đường "
+"dẫn tương đối."
+
+#: dupeguru/core/app.py:47
 msgid ""
 "You're about to open many files at once. Depending on what those files are "
 "opened with, doing so can create quite a mess. Continue?"
@@ -29,27 +36,44 @@ msgstr ""
 "Bạn chuẩn bị mở nhiều tập tin cùng lúc. Dựa trên chương trình các tập tin "
 "được mở, thao tác này có thể gây ra trạng thái lộn xộn. Vẫn muốn tiếp tục?"
 
-#: core\app.py:73
+#: dupeguru/core/app.py:51
+msgid "{} of the {} marked files are reference files!"
+msgstr "{} trong tổng số {} tệp đã đánh dấu là tệp tham chiếu!"
+
+#: dupeguru/core/app.py:52
+msgid "{} of the {} selected files are reference files!"
+msgstr "{} trong số {} tệp đã chọn là tệp tham chiếu!"
+
+#: dupeguru/core/app.py:53
+msgid ""
+"Deleted files can't be replaced with links while reference files are marked:"
+" the links would point to files being deleted. Nothing has been done."
+msgstr ""
+"Không thể thay thế các tệp đã xóa bằng liên kết khi các tệp tham chiếu được "
+"đánh dấu: các liên kết sẽ trỏ đến các tệp đang bị xóa. Không có gì được thực"
+" hiện."
+
+#: dupeguru/core/app.py:80
 msgid "Scanning for duplicates"
 msgstr "Quét các phần trùng nhau"
 
-#: core\app.py:74
+#: dupeguru/core/app.py:81
 msgid "Loading"
 msgstr "Đang tải"
 
-#: core\app.py:75
+#: dupeguru/core/app.py:82
 msgid "Moving"
 msgstr "Đang di chuyển"
 
-#: core\app.py:76
+#: dupeguru/core/app.py:83
 msgid "Copying"
 msgstr "Đang sao chép"
 
-#: core\app.py:77
+#: dupeguru/core/app.py:84
 msgid "Sending to Trash"
 msgstr "Đang gửi vào thùng rác"
 
-#: core\app.py:289
+#: dupeguru/core/app.py:301
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -57,40 +81,48 @@ msgstr ""
 "Hiện đã có một tiến trình đang được tiến hành. Bạn không thể bắt đầu một "
 "phần khác. Hãy đợi trong vài giây, và sau đó thử lại lần nữa."
 
-#: core\app.py:300
+#: dupeguru/core/app.py:312
 msgid "No duplicates found."
 msgstr "Không tìm thấy thành phần trùng nhau."
 
-#: core\app.py:315
+#: dupeguru/core/app.py:327
 msgid "All marked files were copied successfully."
 msgstr "Tất cả tập tin được đánh dấu đã được sao chép thành công."
 
-#: core\app.py:317
+#: dupeguru/core/app.py:329
 msgid "All marked files were moved successfully."
 msgstr "Tất cả các tập tin được đánh dấu đã được di chuyển thành công."
 
-#: core\app.py:319
+#: dupeguru/core/app.py:331
 msgid "All marked files were deleted successfully."
-msgstr ""
+msgstr "Tất cả các tập tin được đánh dấu đã được xóa thành công."
 
-#: core\app.py:321
+#: dupeguru/core/app.py:333
 msgid "All marked files were successfully sent to Trash."
 msgstr ""
 "Tất cả các tập tin được đánh dấu đã được gửi đến Thùng Rác thành công."
 
-#: core\app.py:326
+#: dupeguru/core/app.py:338
 msgid "Could not load file: {}"
 msgstr "Không thể tải tệp: {}"
 
-#: core\app.py:382
+#: dupeguru/core/app.py:405
 msgid "'{}' already is in the list."
 msgstr "'{}' đã tồn tại trong danh sách."
 
-#: core\app.py:384
+#: dupeguru/core/app.py:408
+msgid ""
+"'{}' could not be read. It might be on a disconnected network share, or you "
+"might not have the permission to access it."
+msgstr ""
+"Không thể đọc được '{}'. Tệp có thể nằm trên một chia sẻ mạng đã ngắt kết "
+"nối hoặc bạn không có quyền truy cập vào tệp đó."
+
+#: dupeguru/core/app.py:414
 msgid "'{}' does not exist."
 msgstr "'{}' không tồn tại."
 
-#: core\app.py:392
+#: dupeguru/core/app.py:422
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
@@ -98,170 +130,207 @@ msgstr ""
 "Các phần được chọn %d khớp với nhau sẽ được bỏ qua trong các lần quét sau. "
 "Tiếp tục?"
 
-#: core\app.py:469
+#: dupeguru/core/app.py:506
 msgid "Select a directory to copy marked files to"
 msgstr ""
 "Vui lòng chọn một thư mục mà bạn muốn sao chép các tệp đã đánh dấu vào"
 
-#: core\app.py:471
+#: dupeguru/core/app.py:508
 msgid "Select a directory to move marked files to"
 msgstr ""
 "Vui lòng chọn một thư mục mà bạn muốn di chuyển các tệp đã đánh dấu đến"
 
-#: core\app.py:510
+#: dupeguru/core/app.py:554
 msgid "Select a destination for your exported CSV"
 msgstr "Chọn một điểm xuất dữ liệu dạng CSV"
 
-#: core\app.py:516 core\app.py:777 core\app.py:787
+#: dupeguru/core/app.py:560 dupeguru/core/app.py:830 dupeguru/core/app.py:840
 msgid "Couldn't write to file: {}"
 msgstr "Không thể ghi vào tệp: {}"
 
-#: core\app.py:539
+#: dupeguru/core/app.py:584
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 "Bạn vẫn chưa chỉnh sửa phần thiết lập dòng lệnh. Hãy sử dụng tính năng này "
 "trong phần tùy biến của bạn."
 
-#: core\app.py:701 core\app.py:713
+#: dupeguru/core/app.py:600
+msgid "Invalid custom command syntax: {}"
+msgstr "Cú pháp lệnh tùy chỉnh không hợp lệ: {}"
+
+#: dupeguru/core/app.py:610
+msgid "Failed to execute custom command: {}"
+msgstr "Không thể thực thi lệnh tùy chỉnh: {}"
+
+#: dupeguru/core/app.py:753 dupeguru/core/app.py:765
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Bạn chuẩn bị loại bỏ %d tập tin từ phần kết quả. Tiếp tục?"
 
-#: core\app.py:749
+#: dupeguru/core/app.py:802
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr "{} các nhóm trùng nhau đã được thay đổi bởi thứ tự-tái ưu tiên."
 
-#: core\app.py:797
+#: dupeguru/core/app.py:850
 msgid "The selected directories contain no scannable file."
 msgstr "Các thứ mục được chọn chứa các tập tin không thể quét được."
 
-#: core\app.py:813
+#: dupeguru/core/app.py:866
 msgid "Collecting files to scan"
 msgstr "Đang thu thập các tập tin để quét"
 
-#: core\app.py:863
+#: dupeguru/core/app.py:932
 msgid "%s (%d discarded)"
 msgstr "%s (%d bị bỏ qua)"
 
-#: core\directories.py:191
+#: dupeguru/core/directories.py:227
 msgid "Collected {} files to scan"
-msgstr ""
+msgstr "Đã thu thập {} tập tin để quét"
 
-#: core\directories.py:207
+#: dupeguru/core/directories.py:243
 msgid "Collected {} folders to scan"
-msgstr ""
+msgstr "Đã thu thập {} thư mục để quét"
 
-#: core\engine.py:27
+#: dupeguru/core/engine.py:27
 msgid "%d matches found from %d groups"
-msgstr ""
+msgstr "Tìm thấy %d trận đấu từ %d nhóm"
 
-#: core\gui\deletion_options.py:71
+#: dupeguru/core/gui/deletion_options.py:71
 msgid "You are sending {} file(s) to the Trash."
 msgstr "Bạn sắp sửa gửi {} (các)tập tin đến Thùng Rác."
 
-#: core\gui\exclude_list_table.py:14
+#: dupeguru/core/gui/exclude_list_table.py:14
 msgid "Regular Expressions"
 msgstr "Biểu thức chính quy"
 
-#: core\gui\ignore_list_dialog.py:25
+#: dupeguru/core/gui/ignore_list_dialog.py:25
 msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr "Bạn có thực sự muốn loại bỏ tất cả %d đối tượng từ danh sách bỏ qua?"
 
-#: core\me\scanner.py:20 core\se\scanner.py:16
+#: dupeguru/core/me/scanner.py:20 dupeguru/core/se/scanner.py:16
 msgid "Filename"
 msgstr "Tên tệp"
 
-#: core\me\scanner.py:21
+#: dupeguru/core/me/scanner.py:21
 msgid "Filename - Fields"
 msgstr "Tên tệp - Trường"
 
-#: core\me\scanner.py:22
+#: dupeguru/core/me/scanner.py:22
 msgid "Filename - Fields (No Order)"
 msgstr "Tên tệp - Trường (Không có thứ tự)"
 
-#: core\me\scanner.py:23
+#: dupeguru/core/me/scanner.py:23
 msgid "Tags"
 msgstr "Tags"
 
-#: core\me\scanner.py:24 core\pe\scanner.py:22 core\se\scanner.py:17
+#: dupeguru/core/me/scanner.py:24 dupeguru/core/pe/scanner.py:23
+#: dupeguru/core/se/scanner.py:17
 msgid "Contents"
 msgstr "Nội dung"
 
-#: core\pe\matchblock.py:66
+#: dupeguru/core/pe/matchblock.py:119
 msgid "Analyzed %d/%d pictures"
 msgstr "Đã phân tích %d/%d hình ảnh"
 
-#: core\pe\matchblock.py:183
+#: dupeguru/core/pe/matchblock.py:217
 msgid "Performed %d/%d chunk matches"
 msgstr "Đã thể thiện %d/%d các phần khớp nhau"
 
-#: core\pe\matchblock.py:191
+#: dupeguru/core/pe/matchblock.py:225
 msgid "Preparing for matching"
 msgstr "Đang chuẩn bị phần khớp nhau"
 
-#: core\pe\matchblock.py:240
+#: dupeguru/core/pe/matchblock.py:274
 msgid "Verified %d/%d matches"
 msgstr "Đã xác nhận %d/%d phần khớp nhau"
 
-#: core\pe\matchexif.py:19
+#: dupeguru/core/pe/matchexif.py:19
 msgid "Read EXIF of %d/%d pictures"
 msgstr "Đọc thông tin EXIF của %d/%d hình ảnh"
 
-#: core\pe\scanner.py:23
+#: dupeguru/core/pe/scanner.py:24
 msgid "EXIF Timestamp"
 msgstr "Dấu thời gian EXIF"
 
-#: core\prioritize.py:70
+#: dupeguru/core/prioritize.py:103
 msgid "None"
 msgstr "Không "
 
-#: core\prioritize.py:102
+#: dupeguru/core/prioritize.py:141
 msgid "Ends with number"
 msgstr "Tận cùng là số"
 
-#: core\prioritize.py:103
+#: dupeguru/core/prioritize.py:142
 msgid "Doesn't end with number"
 msgstr "Tận cùng không chứa số"
 
-#: core\prioritize.py:104
+#: dupeguru/core/prioritize.py:143
 msgid "Longest"
 msgstr "Dài nhất"
 
-#: core\prioritize.py:105
+#: dupeguru/core/prioritize.py:144
 msgid "Shortest"
 msgstr "Ngắn nhất"
 
-#: core\prioritize.py:142
+#: dupeguru/core/prioritize.py:145
+msgid "Longest Path"
+msgstr "Đường Dài Nhất"
+
+#: dupeguru/core/prioritize.py:146
+msgid "Shortest Path"
+msgstr "Ngắn nhất"
+
+#: dupeguru/core/prioritize.py:147
+msgid "A to Z"
+msgstr "Từ A đến Z"
+
+#: dupeguru/core/prioritize.py:148
+msgid "Z to A"
+msgstr "Z đến A"
+
+#: dupeguru/core/prioritize.py:149
+msgid "A to Z, natural order"
+msgstr "Từ A đến Z, theo thứ tự tự nhiên"
+
+#: dupeguru/core/prioritize.py:150
+msgid "Z to A, natural order"
+msgstr "Z đến A, theo thứ tự tự nhiên"
+
+#: dupeguru/core/prioritize.py:203
 msgid "Highest"
 msgstr "Cao nhất"
 
-#: core\prioritize.py:142
+#: dupeguru/core/prioritize.py:203
 msgid "Lowest"
 msgstr "Thấp nhất"
 
-#: core\prioritize.py:171
+#: dupeguru/core/prioritize.py:232
 msgid "Newest"
 msgstr "Mới nhất"
 
-#: core\prioritize.py:171
+#: dupeguru/core/prioritize.py:232
 msgid "Oldest"
 msgstr "Cũ nhất"
 
-#: core\results.py:135
+#: dupeguru/core/results.py:143
 msgid "%d / %d (%s / %s) duplicates marked."
 msgstr "%d / %d (%s / %s) phần trùng nhau đã được đánh dấu."
 
-#: core\results.py:142
+#: dupeguru/core/results.py:151
+msgid " Reference files marked: %d (%s)."
+msgstr " Các tệp tham chiếu được đánh dấu: %d (%s)."
+
+#: dupeguru/core/results.py:156
 msgid " filter: %s"
 msgstr " bộ lọc: %s"
 
-#: core\scanner.py:114
+#: dupeguru/core/scanner.py:114
 msgid "Read metadata of %d/%d files"
 msgstr "Đọc thông tin chi tiết của %d/%d tập tin"
 
-#: core\scanner.py:152
+#: dupeguru/core/scanner.py:152
 msgid "Almost done! Fiddling with results..."
 msgstr "Sắp xong! Loay hoay với kết quả..."
 
-#: core\se\scanner.py:18
+#: dupeguru/core/se/scanner.py:18
 msgid "Folders"
 msgstr "Thư mục"

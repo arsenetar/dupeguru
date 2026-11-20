@@ -1,25 +1,32 @@
 # Translators:
-# Andrew Senetar <arsenetar@gmail.com>, 2021
-# Fuan <jcfrt@posteo.net>, 2021
+# carl byington, 2026
 #
 msgid ""
 msgstr ""
-"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
-"Language-Team: Portuguese (Brazil) (https://app.transifex.com/voltaicideas/teams/116153/pt_BR/)\n"
+"Last-Translator: carl byington, 2026\n"
+"Language-Team: Portuguese (Brazil) (https://app.transifex.com/five-ten-sg/teams/311749/pt_BR/)\n"
 "Language: pt_BR\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: utf-8\n"
 "Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
-#: core\app.py:44
+#: dupeguru/core/app.py:44
 msgid "There are no marked duplicates. Nothing has been done."
 msgstr "Não há duplicatas marcadas. Nada foi feito."
 
-#: core\app.py:45
+#: dupeguru/core/app.py:45
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr "Não há duplicatas selecionadas. Nada foi feito."
 
-#: core\app.py:46
+#: dupeguru/core/app.py:46
+msgid ""
+"The file is not under any folder in the Directories panel. Can't recreate "
+"relative path."
+msgstr ""
+"O arquivo não está em nenhuma pasta no painel de diretórios. Não é possível "
+"recriar o caminho relativo."
+
+#: dupeguru/core/app.py:47
 msgid ""
 "You're about to open many files at once. Depending on what those files are "
 "opened with, doing so can create quite a mess. Continue?"
@@ -27,27 +34,44 @@ msgstr ""
 "Você está prestes a abrir muitos arquivos de uma vez. Problemas podem surgir"
 " dependendo de qual app seja usado para abri-los. Deseja continuar?"
 
-#: core\app.py:73
+#: dupeguru/core/app.py:51
+msgid "{} of the {} marked files are reference files!"
+msgstr "{} dos {} arquivos marcados são arquivos de referência!"
+
+#: dupeguru/core/app.py:52
+msgid "{} of the {} selected files are reference files!"
+msgstr "{} dos {} arquivos selecionados são arquivos de referência!"
+
+#: dupeguru/core/app.py:53
+msgid ""
+"Deleted files can't be replaced with links while reference files are marked:"
+" the links would point to files being deleted. Nothing has been done."
+msgstr ""
+"Arquivos excluídos não podem ser substituídos por links enquanto os arquivos"
+" de referência estiverem marcados: os links apontariam para arquivos que "
+"estão sendo excluídos. Nada foi feito."
+
+#: dupeguru/core/app.py:80
 msgid "Scanning for duplicates"
 msgstr "Buscando por duplicatas"
 
-#: core\app.py:74
+#: dupeguru/core/app.py:81
 msgid "Loading"
 msgstr "Carregando"
 
-#: core\app.py:75
+#: dupeguru/core/app.py:82
 msgid "Moving"
 msgstr "Movendo"
 
-#: core\app.py:76
+#: dupeguru/core/app.py:83
 msgid "Copying"
 msgstr "Copiando"
 
-#: core\app.py:77
+#: dupeguru/core/app.py:84
 msgid "Sending to Trash"
 msgstr "Movendo para o Lixo"
 
-#: core\app.py:289
+#: dupeguru/core/app.py:301
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -55,205 +79,250 @@ msgstr ""
 "Ainda há uma ação em andamento. Não é possível iniciar outra agora. Espere "
 "alguns segundos e tente novamente."
 
-#: core\app.py:300
+#: dupeguru/core/app.py:312
 msgid "No duplicates found."
 msgstr "Nenhuma duplicata encontrada."
 
-#: core\app.py:315
+#: dupeguru/core/app.py:327
 msgid "All marked files were copied successfully."
 msgstr "Todos os arquivos marcados foram copiados corretamente."
 
-#: core\app.py:317
+#: dupeguru/core/app.py:329
 msgid "All marked files were moved successfully."
 msgstr "Todos os arquivos marcados foram relocados corretamente."
 
-#: core\app.py:319
+#: dupeguru/core/app.py:331
 msgid "All marked files were deleted successfully."
-msgstr ""
+msgstr "Todos os arquivos marcados foram excluídos corretamente."
 
-#: core\app.py:321
+#: dupeguru/core/app.py:333
 msgid "All marked files were successfully sent to Trash."
 msgstr "Todos os arquivos marcados foram movidos para o Lixo corretamente."
 
-#: core\app.py:326
+#: dupeguru/core/app.py:338
 msgid "Could not load file: {}"
 msgstr "Não foi possível carregar o arquivo: {}"
 
-#: core\app.py:382
+#: dupeguru/core/app.py:405
 msgid "'{}' already is in the list."
 msgstr "‘{}’ já está na lista."
 
-#: core\app.py:384
+#: dupeguru/core/app.py:408
+msgid ""
+"'{}' could not be read. It might be on a disconnected network share, or you "
+"might not have the permission to access it."
+msgstr ""
+"Não foi possível ler '{}'. O arquivo pode estar em um compartilhamento de "
+"rede desconectado ou você pode não ter permissão para acessá-lo."
+
+#: dupeguru/core/app.py:414
 msgid "'{}' does not exist."
 msgstr "‘{}’ não existe."
 
-#: core\app.py:392
+#: dupeguru/core/app.py:422
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
 msgstr "Excluir %d duplicata(s) selecionada(s) de escaneamentos posteriores?"
 
-#: core\app.py:469
+#: dupeguru/core/app.py:506
 msgid "Select a directory to copy marked files to"
 msgstr "Selecione um diretório onde deseja copiar os arquivos marcados"
 
-#: core\app.py:471
+#: dupeguru/core/app.py:508
 msgid "Select a directory to move marked files to"
 msgstr "Selecione um diretório para onde deseja mover os arquivos marcados"
 
-#: core\app.py:510
+#: dupeguru/core/app.py:554
 msgid "Select a destination for your exported CSV"
 msgstr "Selecione uma pasta para o CSV exportado"
 
-#: core\app.py:516 core\app.py:777 core\app.py:787
+#: dupeguru/core/app.py:560 dupeguru/core/app.py:830 dupeguru/core/app.py:840
 msgid "Couldn't write to file: {}"
 msgstr "Não foi possível gravar no arquivo: {}"
 
-#: core\app.py:539
+#: dupeguru/core/app.py:584
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr ""
 "Você não possui nenhum comando personalizado. Crie um nas preferências."
 
-#: core\app.py:701 core\app.py:713
+#: dupeguru/core/app.py:600
+msgid "Invalid custom command syntax: {}"
+msgstr "Sintaxe de comando personalizado inválida: {}"
+
+#: dupeguru/core/app.py:610
+msgid "Failed to execute custom command: {}"
+msgstr "Falha ao executar comando personalizado: {}"
+
+#: dupeguru/core/app.py:753 dupeguru/core/app.py:765
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Remover %d arquivo(s) dos resultados?"
 
-#: core\app.py:749
+#: dupeguru/core/app.py:802
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr "{} grupos de duplicatas alterados ao repriorizar."
 
-#: core\app.py:797
+#: dupeguru/core/app.py:850
 msgid "The selected directories contain no scannable file."
 msgstr "As pastas selecionadas não contém arquivos escaneáveis."
 
-#: core\app.py:813
+#: dupeguru/core/app.py:866
 msgid "Collecting files to scan"
 msgstr "Juntando arquivos para escanear"
 
-#: core\app.py:863
+#: dupeguru/core/app.py:932
 msgid "%s (%d discarded)"
 msgstr "%s (%d rejeitado(s))"
 
-#: core\directories.py:191
+#: dupeguru/core/directories.py:227
 msgid "Collected {} files to scan"
-msgstr ""
+msgstr "{} arquivos coletados para escanear"
 
-#: core\directories.py:207
+#: dupeguru/core/directories.py:243
 msgid "Collected {} folders to scan"
-msgstr ""
+msgstr "{} pastas coletadas para escanear"
 
-#: core\engine.py:27
+#: dupeguru/core/engine.py:27
 msgid "%d matches found from %d groups"
-msgstr ""
+msgstr "%d correspondências encontradas em %d grupos"
 
-#: core\gui\deletion_options.py:71
+#: dupeguru/core/gui/deletion_options.py:71
 msgid "You are sending {} file(s) to the Trash."
 msgstr "Você está movendo {} arquivo(s) para o Lixo."
 
-#: core\gui\exclude_list_table.py:14
+#: dupeguru/core/gui/exclude_list_table.py:14
 msgid "Regular Expressions"
 msgstr "Expressões regulares"
 
-#: core\gui\ignore_list_dialog.py:25
+#: dupeguru/core/gui/ignore_list_dialog.py:25
 msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr "Tem certeza de que deseja remover todos os %d itens da lista Ignorar?"
 
-#: core\me\scanner.py:20 core\se\scanner.py:16
+#: dupeguru/core/me/scanner.py:20 dupeguru/core/se/scanner.py:16
 msgid "Filename"
 msgstr "Nome do arquivo"
 
-#: core\me\scanner.py:21
+#: dupeguru/core/me/scanner.py:21
 msgid "Filename - Fields"
 msgstr "Nome do arquivo - campos"
 
-#: core\me\scanner.py:22
+#: dupeguru/core/me/scanner.py:22
 msgid "Filename - Fields (No Order)"
 msgstr "Nome do arquivo - campos (sem pedido)"
 
-#: core\me\scanner.py:23
+#: dupeguru/core/me/scanner.py:23
 msgid "Tags"
 msgstr "Tags"
 
-#: core\me\scanner.py:24 core\pe\scanner.py:22 core\se\scanner.py:17
+#: dupeguru/core/me/scanner.py:24 dupeguru/core/pe/scanner.py:23
+#: dupeguru/core/se/scanner.py:17
 msgid "Contents"
 msgstr "Conteúdo"
 
-#: core\pe\matchblock.py:66
+#: dupeguru/core/pe/matchblock.py:119
 msgid "Analyzed %d/%d pictures"
 msgstr "%d/%d fotos analizadas"
 
-#: core\pe\matchblock.py:183
+#: dupeguru/core/pe/matchblock.py:217
 msgid "Performed %d/%d chunk matches"
 msgstr "%d/%d resultados em blocos executados"
 
-#: core\pe\matchblock.py:191
+#: dupeguru/core/pe/matchblock.py:225
 msgid "Preparing for matching"
 msgstr "Preparando para comparação"
 
-#: core\pe\matchblock.py:240
+#: dupeguru/core/pe/matchblock.py:274
 msgid "Verified %d/%d matches"
 msgstr "%d/%d resultados verificados"
 
-#: core\pe\matchexif.py:19
+#: dupeguru/core/pe/matchexif.py:19
 msgid "Read EXIF of %d/%d pictures"
 msgstr "EXIF lido em %d/%d fotos"
 
-#: core\pe\scanner.py:23
+#: dupeguru/core/pe/scanner.py:24
 msgid "EXIF Timestamp"
 msgstr "Timestamp EXIF"
 
-#: core\prioritize.py:70
+#: dupeguru/core/prioritize.py:103
 msgid "None"
 msgstr "Nenhum"
 
-#: core\prioritize.py:102
+#: dupeguru/core/prioritize.py:141
 msgid "Ends with number"
 msgstr "Termina com número"
 
-#: core\prioritize.py:103
+#: dupeguru/core/prioritize.py:142
 msgid "Doesn't end with number"
 msgstr "Não termina com número"
 
-#: core\prioritize.py:104
+#: dupeguru/core/prioritize.py:143
 msgid "Longest"
 msgstr "Mais longo"
 
-#: core\prioritize.py:105
+#: dupeguru/core/prioritize.py:144
 msgid "Shortest"
 msgstr "Mais curto"
 
-#: core\prioritize.py:142
+#: dupeguru/core/prioritize.py:145
+msgid "Longest Path"
+msgstr "Caminho Mais Longo"
+
+#: dupeguru/core/prioritize.py:146
+msgid "Shortest Path"
+msgstr "Caminho Mais Curto"
+
+#: dupeguru/core/prioritize.py:147
+msgid "A to Z"
+msgstr "De A a Z"
+
+#: dupeguru/core/prioritize.py:148
+msgid "Z to A"
+msgstr "Z a A"
+
+#: dupeguru/core/prioritize.py:149
+msgid "A to Z, natural order"
+msgstr "De A a Z, ordem natural"
+
+#: dupeguru/core/prioritize.py:150
+msgid "Z to A, natural order"
+msgstr "Z a A, ordem natural"
+
+#: dupeguru/core/prioritize.py:203
 msgid "Highest"
 msgstr "Maior"
 
-#: core\prioritize.py:142
+#: dupeguru/core/prioritize.py:203
 msgid "Lowest"
 msgstr "Menor"
 
-#: core\prioritize.py:171
+#: dupeguru/core/prioritize.py:232
 msgid "Newest"
 msgstr "Mais recente"
 
-#: core\prioritize.py:171
+#: dupeguru/core/prioritize.py:232
 msgid "Oldest"
 msgstr "Mais antigo"
 
-#: core\results.py:135
+#: dupeguru/core/results.py:143
 msgid "%d / %d (%s / %s) duplicates marked."
 msgstr "%d / %d (%s / %s) duplicatas marcadas."
 
-#: core\results.py:142
+#: dupeguru/core/results.py:151
+msgid " Reference files marked: %d (%s)."
+msgstr " Arquivos de referência marcados: %d (%s)."
+
+#: dupeguru/core/results.py:156
 msgid " filter: %s"
 msgstr " filtro: %s"
 
-#: core\scanner.py:114
+#: dupeguru/core/scanner.py:114
 msgid "Read metadata of %d/%d files"
 msgstr "Metadados lidos em %d/%d arquivos"
 
-#: core\scanner.py:152
+#: dupeguru/core/scanner.py:152
 msgid "Almost done! Fiddling with results..."
 msgstr "Quase pronto! Mexendo nos resultados ..."
 
-#: core\se\scanner.py:18
+#: dupeguru/core/se/scanner.py:18
 msgid "Folders"
 msgstr "Pastas"

@@ -1,0 +1,19 @@
+git:
+  filters:
+    - filter_type: file
+      file_format: PO
+      source_language: en
+      source_file: locale/columns.pot
+      translation_files_expression: 'locale/<lang>/LC_MESSAGES/columns.po'
+
+    - filter_type: file
+      file_format: PO
+      source_language: en
+      source_file: locale/core.pot
+      translation_files_expression: 'locale/<lang>/LC_MESSAGES/core.po'
+
+    - filter_type: file
+      file_format: PO
+      source_language: en
+      source_file: locale/ui.pot
+      translation_files_expression: 'locale/<lang>/LC_MESSAGES/ui.po'

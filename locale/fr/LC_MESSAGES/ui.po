@@ -66,8 +66,8 @@ msgid ""
 "After having deleted a duplicate, place a link targeting the reference file "
 "to replace the deleted file."
 msgstr ""
-"Après avoir effacé un fichier dupliqué, remplacer celui-ci par un lien vers le "
-"fichier référence."
+"Après avoir effacé un fichier dupliqué, remplacer celui-ci par un lien vers "
+"le fichier référence."
 
 #: qt/deletion_options.py:44
 msgid "Hardlink"
@@ -91,7 +91,8 @@ msgid ""
 "usually used as a workaround when the normal deletion method doesn't work."
 msgstr ""
 "Au lieu de passer par la corbeille, supprimer directement. Cette option "
-"n'est généralement utilisée qu'en cas d'échec avec la métode de suppression normale."
+"n'est généralement utilisée qu'en cas d'échec avec la métode de suppression "
+"normale."
 
 #: qt/deletion_options.py:59 cocoa/en.lproj/Localizable.strings:0
 msgid "Proceed"
@@ -369,9 +370,9 @@ msgid ""
 " the best to these criteria to their respective group's reference position. "
 "Read the help file for more information."
 msgstr ""
-"Ajoutez des critères dans la liste de droite et cliquez sur OK pour envoyer les doublons qui "
-"correspondent le plus à ces critères à la position de référence. Une lecture "
-"préalable du fichier d'aide est conseillée."
+"Ajoutez des critères dans la liste de droite et cliquez sur OK pour envoyer "
+"les doublons qui correspondent le plus à ces critères à la position de "
+"référence. Une lecture préalable du fichier d'aide est conseillée."
 
 #: qt/problem_dialog.py:33 cocoa/en.lproj/Localizable.strings:0
 msgid "Problems!"
@@ -383,9 +384,9 @@ msgid ""
 "these problems are described in the table below. Those files were not "
 "removed from your results."
 msgstr ""
-"Des problèmes ont été rencontrés lors du traitement de certains fichiers (ou tous). La"
-" nature de ces problèmes est décrite dans la liste ci-dessous. Ces fichiers "
-"n'ont pas été retirés des résultats."
+"Des problèmes ont été rencontrés lors du traitement de certains fichiers (ou"
+" tous). La nature de ces problèmes est décrite dans la liste ci-dessous. Ces"
+" fichiers n'ont pas été retirés des résultats."
 
 #: qt/problem_dialog.py:56
 msgid "Reveal Selected"
@@ -959,7 +960,8 @@ msgstr "Utiliser les dialogues natifs de l'OS"
 msgid ""
 "For actions such as file/folder selection use the OS native dialogs.\n"
 "Some native dialogs have limited functionality."
-msgstr "Pour les actions telles que la sélection de fichiers/dossiers, utilisez les boîtes de dialogue natives du système d'exploitation.\n"
+msgstr ""
+"Pour les actions telles que la sélection de fichiers/dossiers, utilisez les boîtes de dialogue natives du système d'exploitation.\n"
 "Des boites de dialogues ont des fonctionnalités limitées."
 
 #: qt\se\preferences_dialog.py:68
@@ -974,8 +976,9 @@ msgstr "Vider le cache"
 msgid ""
 "Do you really want to clear the cache? This will remove all cached file "
 "hashes and picture analysis."
-msgstr "Voulez-vous réellement vider le cacher ? Cela supprimera tous les hash de fichiers dans le cache"
-" et les analyses d'image."
+msgstr ""
+"Voulez-vous réellement vider le cacher ? Cela supprimera tous les hash de "
+"fichiers dans le cache et les analyses d'image."
 
 #: qt\app.py:299
 msgid "Cache cleared."
@@ -991,7 +994,9 @@ msgstr "Opération de balayage de profil"
 
 #: qt\preferences_dialog.py:242
 msgid "Profile the scan operation and save logs for optimization."
-msgstr "Profilage de l'opération de balayage et enregistrement des journaux pour optimisation"
+msgstr ""
+"Profilage de l'opération de balayage et enregistrement des journaux pour "
+"optimisation"
 
 #: qt\preferences_dialog.py:246
 msgid "Logs located in: <a href=\"{}\">{}</a>"
@@ -1023,7 +1028,9 @@ msgstr "Pas de mise à jour disponible."
 
 #: qt\about_box.py:71
 msgid "New version {} available, download <a href=\"{}\">here</a>."
-msgstr "Une nouvelle version ({}) est disponible, téléchagez-là <a href=\"{}\">ici</a>."
+msgstr ""
+"Une nouvelle version ({}) est disponible, téléchagez-là <a "
+"href=\"{}\">ici</a>."
 
 #: qt\error_report_dialog.py:50
 msgid "Error Report"
@@ -1143,8 +1150,10 @@ msgstr "Recherche..."
 msgid ""
 "These options are for advanced users or for very specific situations, most "
 "users should not have to modify these."
-msgstr "Ces options sont destinées aux utilisateurs avancés ou pour des situation bien spécifiques, "
-"la plupart des utilisateurs ne devraient pas avoir à les modifier."
+msgstr ""
+"Ces options sont destinées aux utilisateurs avancés ou pour des situation "
+"bien spécifiques, la plupart des utilisateurs ne devraient pas avoir à les "
+"modifier."
 
 #: qt\preferences_dialog.py:225
 msgid "Include existence check after scan completion"
@@ -1160,15 +1169,17 @@ msgstr "Annuler ?"
 
 #: qt\progress_window.py:65
 msgid "Are you sure you want to cancel? All progress will be lost."
-msgstr "Êtes-vous sûr de vouloir annuler ? Tout ce qui a déjà été fait va être perdu."
+msgstr ""
+"Êtes-vous sûr de vouloir annuler ? Tout ce qui a déjà été fait va être "
+"perdu."
 
 #: qt\exclude_list_dialog.py:161
 msgid ""
 "These (case sensitive) python regular expressions will filter out files during scans.<br>Directores will also have their <strong>default state</strong> set to Excluded in the Directories tab if their name happens to match one of the selected regular expressions.<br>For each file collected, two tests are performed to determine whether or not to completely ignore it:<br><li>1. Regular expressions with no path separator in them will be compared to the file name only.</li>\n"
 "<li>2. Regular expressions with at least one path separator in them will be compared to the full path to the file.</li><br>Example: if you want to filter out .PNG files from the \"My Pictures\" directory only:<br><code>.*My\\sPictures\\\\.*\\.png</code><br><br>You can test the regular expression with the \"test string\" button after pasting a fake path in the test field:<br><code>C:\\\\User\\My Pictures\\test.png</code><br><br>\n"
 "Matching regular expressions will be highlighted.<br>If there is at least one highlight, the path or filename tested will be ignored during scans.<br><br>Directories and files starting with a period '.' are filtered out by default.<br><br>"
-msgstr "Cette expression régulière python (sensible à la casse) va filtrer les fichiers pendant les scans.<br>"
-"Ces expressions régulières python (sensible aux majuscules) peuvent ignorer les fichiers pendant les scans. Les dossiers auront également leur <strong>état par défaut</strong> mis sur Exclus dans l'onglet Dossiers si leur nom correspond à une des expressions régulières sélectionnées<br>Pour chaque fichier collecté, deux tests sont faits pour déterminer s'il doit être totalement ignoré:<br><li>1. Les expressions régulières sans séparateur de chemin sont comparées au nom de fichier seul.</li>\n"
+msgstr ""
+"Cette expression régulière python (sensible à la casse) va filtrer les fichiers pendant les scans.<br>Ces expressions régulières python (sensible aux majuscules) peuvent ignorer les fichiers pendant les scans. Les dossiers auront également leur <strong>état par défaut</strong> mis sur Exclus dans l'onglet Dossiers si leur nom correspond à une des expressions régulières sélectionnées<br>Pour chaque fichier collecté, deux tests sont faits pour déterminer s'il doit être totalement ignoré:<br><li>1. Les expressions régulières sans séparateur de chemin sont comparées au nom de fichier seul.</li>\n"
 "<li>2. Les expressions régulières avec au moins un séparateur de chemin sont comparées au chemin complet vers le fichier.</li><br>\n"
 "Exemple: si vous voulez uniquement ignorer les fichiers .PNG du dossier \"Mes Images\":<br><code>.*Mes\\sImages\\\\.*\\.png</code><br><br>Vous pouvez tester l'expression régulière via le bouton \"Tester la chaîne de caractères\" après avoir tapé un faux chemin de fichier dans le champs correspondant:<br><code>C:\\\\Utilisateur\\Mes Images\\test.png</code><br><br>\n"
 "Les expressions régulières qui fonctionnent seront surlignées.<br>S'il y a au moins un surlignage, le chemin ou nom de fichier testé sera ignoré durant les scans.<br><br>Les dossiers et fichiers commençant par un point '.' sont ignorés par défaut.<br><br>"
@@ -1176,3 +1187,29 @@ msgstr "Cette expression régulière python (sensible à la casse) va filtrer le
 #: qt\pe\preferences_dialog.py:24
 msgid "Match pictures of different rotations"
 msgstr "Associer des images de différentes rotations"
+
+#: dupeguru/qt/pe/preferences_dialog.py:33
+msgid "Scan speed:"
+msgstr ""
+
+#: dupeguru/qt/pe/preferences_dialog.py:36
+msgid "Accurate (slow)"
+msgstr ""
+
+#: dupeguru/qt/pe/preferences_dialog.py:37
+msgid "Balanced (recommended)"
+msgstr ""
+
+#: dupeguru/qt/pe/preferences_dialog.py:38
+msgid "Turbo"
+msgstr ""
+
+#: dupeguru/qt/preferences_dialog.py:261
+msgid "Allow marking reference files"
+msgstr ""
+
+#: dupeguru/qt/preferences_dialog.py:263
+msgid ""
+"Reference files get a mark box too, so that a whole group can be deleted.\n"
+"Mark All and Invert Marking still leave them alone, files in reference folders can never be marked, and acting on marked references asks first."
+msgstr ""

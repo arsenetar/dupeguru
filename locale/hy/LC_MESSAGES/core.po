@@ -1,25 +1,32 @@
 # Translators:
-# Andrew Senetar <arsenetar@gmail.com>, 2021
-# Fuan <jcfrt@posteo.net>, 2021
+# carl byington, 2026
 #
 msgid ""
 msgstr ""
-"Last-Translator: Fuan <jcfrt@posteo.net>, 2021\n"
-"Language-Team: Armenian (https://app.transifex.com/voltaicideas/teams/116153/hy/)\n"
+"Last-Translator: carl byington, 2026\n"
+"Language-Team: Armenian (https://app.transifex.com/five-ten-sg/teams/311749/hy/)\n"
 "Language: hy\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: utf-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: core\app.py:44
+#: dupeguru/core/app.py:44
 msgid "There are no marked duplicates. Nothing has been done."
 msgstr "Նշված կրկնօրինակներ չկան: Ոչինչ չի արվել."
 
-#: core\app.py:45
+#: dupeguru/core/app.py:45
 msgid "There are no selected duplicates. Nothing has been done."
 msgstr "Ընտրված կրկնօրինակներ չկան: Ոչինչ չի արվել."
 
-#: core\app.py:46
+#: dupeguru/core/app.py:46
+msgid ""
+"The file is not under any folder in the Directories panel. Can't recreate "
+"relative path."
+msgstr ""
+"Ֆայլը գտնվող որևէ թղթապանակում չէ Ցուցակների վահանակում: Հնարավոր չէ "
+"վերստեղծել հարաբերական ուղին:"
+
+#: dupeguru/core/app.py:47
 msgid ""
 "You're about to open many files at once. Depending on what those files are "
 "opened with, doing so can create quite a mess. Continue?"
@@ -28,27 +35,43 @@ msgstr ""
 "են բացվում այդ ֆայլերը, դա անելը կարող է բավականին խառնաշփոթ ստեղծել: "
 "Շարունակել?"
 
-#: core\app.py:73
+#: dupeguru/core/app.py:51
+msgid "{} of the {} marked files are reference files!"
+msgstr "Նշված {} ֆայլերից {}-ը հղումային ֆայլեր են:"
+
+#: dupeguru/core/app.py:52
+msgid "{} of the {} selected files are reference files!"
+msgstr "Ընտրված {} ֆայլերից {}֊ը հղման ֆայլեր են:"
+
+#: dupeguru/core/app.py:53
+msgid ""
+"Deleted files can't be replaced with links while reference files are marked:"
+" the links would point to files being deleted. Nothing has been done."
+msgstr ""
+"Ջնջված ֆայլերը չեն կարող փոխարինվել հղումներով, քանի դեռ նշված են հղումային "
+"ֆայլերը. հղումները ցույց կտան դեպի ջնջվող ֆայլերը: Ոչինչ չի արվել:"
+
+#: dupeguru/core/app.py:80
 msgid "Scanning for duplicates"
 msgstr "Ստուգվում են կրկնօրինակները"
 
-#: core\app.py:74
+#: dupeguru/core/app.py:81
 msgid "Loading"
 msgstr "Բացվում է"
 
-#: core\app.py:75
+#: dupeguru/core/app.py:82
 msgid "Moving"
 msgstr "Տեղափոխվում է"
 
-#: core\app.py:76
+#: dupeguru/core/app.py:83
 msgid "Copying"
 msgstr "Պատճենվում է"
 
-#: core\app.py:77
+#: dupeguru/core/app.py:84
 msgid "Sending to Trash"
 msgstr "Ուղարկվում է Աղբարկղ"
 
-#: core\app.py:289
+#: dupeguru/core/app.py:301
 msgid ""
 "A previous action is still hanging in there. You can't start a new one yet. "
 "Wait a few seconds, then try again."
@@ -56,206 +79,252 @@ msgstr ""
 "Նախորդ գործողությունը դեռևս ձեռադրում է այստեղ: Չեք կարող սկսել մեկ ուրիշը: "
 "Սպասեք մի քանի վայրկյան և կրկին փորձեք:"
 
-#: core\app.py:300
+#: dupeguru/core/app.py:312
 msgid "No duplicates found."
 msgstr "Կրկնօրինակներ չկան:"
 
-#: core\app.py:315
+#: dupeguru/core/app.py:327
 msgid "All marked files were copied successfully."
 msgstr "Բոլոր նշված ֆայլերը հաջողությամբ պատճենվել են:"
 
-#: core\app.py:317
+#: dupeguru/core/app.py:329
 msgid "All marked files were moved successfully."
 msgstr "Բոլոր նշված ֆայլերը հաջողությամբ տեղափոխվել են:"
 
-#: core\app.py:319
+#: dupeguru/core/app.py:331
 msgid "All marked files were deleted successfully."
-msgstr ""
+msgstr "Բոլոր նշված ֆայլերը հաջողությամբ ջնջվել են:"
 
-#: core\app.py:321
+#: dupeguru/core/app.py:333
 msgid "All marked files were successfully sent to Trash."
 msgstr "Բոլոր նշված ֆայլերը հաջողությամբ Ջնջվել են:"
 
-#: core\app.py:326
+#: dupeguru/core/app.py:338
 msgid "Could not load file: {}"
 msgstr "Հնարավոր չէ բեռնել ֆայլը: {}"
 
-#: core\app.py:382
+#: dupeguru/core/app.py:405
 msgid "'{}' already is in the list."
 msgstr "'{}'-ը արդեն առկա է ցանկում:"
 
-#: core\app.py:384
+#: dupeguru/core/app.py:408
+msgid ""
+"'{}' could not be read. It might be on a disconnected network share, or you "
+"might not have the permission to access it."
+msgstr ""
+"'{}'-ը հնարավոր չէ կարդալ: Այն կարող է լինել անջատված ցանցային ընդհանուր "
+"ռեսուրսի վրա, կամ դուք կարող եք թույլտվություն չունենալ մուտք գործելու "
+"այնտեղ:"
+
+#: dupeguru/core/app.py:414
 msgid "'{}' does not exist."
 msgstr "'{}'-ը գոյություն չունի:"
 
-#: core\app.py:392
+#: dupeguru/core/app.py:422
 msgid ""
 "All selected %d matches are going to be ignored in all subsequent scans. "
 "Continue?"
 msgstr ""
 "Ընտրված %d համընկնումները կանտեսվեն հետագա բոլոր ստուգումներից: Շարունակե՞լ:"
 
-#: core\app.py:469
+#: dupeguru/core/app.py:506
 msgid "Select a directory to copy marked files to"
 msgstr "Ընտրեք գրացուցակ, որտեղ ցանկանում եք պատճենել նշված ֆայլերը"
 
-#: core\app.py:471
+#: dupeguru/core/app.py:508
 msgid "Select a directory to move marked files to"
 msgstr ""
 "Խնդրում ենք ընտրել գրացուցակ, որտեղ ցանկանում եք տեղափոխել նշված ֆայլերը"
 
-#: core\app.py:510
+#: dupeguru/core/app.py:554
 msgid "Select a destination for your exported CSV"
 msgstr "Ընտրեք նպատակակետ ձեր արտահանված CSV- ի համար"
 
-#: core\app.py:516 core\app.py:777 core\app.py:787
+#: dupeguru/core/app.py:560 dupeguru/core/app.py:830 dupeguru/core/app.py:840
 msgid "Couldn't write to file: {}"
 msgstr "Չէր կարող գրել է ֆայլը: {}"
 
-#: core\app.py:539
+#: dupeguru/core/app.py:584
 msgid "You have no custom command set up. Set it up in your preferences."
 msgstr "Դուք չեք կատարել Հրամանի ընտրություն: Կատարեք այն կարգավորումներում:"
 
-#: core\app.py:701 core\app.py:713
+#: dupeguru/core/app.py:600
+msgid "Invalid custom command syntax: {}"
+msgstr "Հրամանի անվավեր շարահյուսություն՝ {}"
+
+#: dupeguru/core/app.py:610
+msgid "Failed to execute custom command: {}"
+msgstr "Չհաջողվեց կատարել օգտատիրոջ հրամանը՝ {}"
+
+#: dupeguru/core/app.py:753 dupeguru/core/app.py:765
 msgid "You are about to remove %d files from results. Continue?"
 msgstr "Դուք պատրաստվում եք ջնջելու %d ֆայլեր: Շարունակե՞լ:"
 
-#: core\app.py:749
+#: dupeguru/core/app.py:802
 msgid "{} duplicate groups were changed by the re-prioritization."
 msgstr "{} կրկնօրինակ խմբերը փոխվել են առաջնահերթության կարգով:"
 
-#: core\app.py:797
+#: dupeguru/core/app.py:850
 msgid "The selected directories contain no scannable file."
 msgstr "Ընտրված թղթապանակները պարունակում են չստուգվող ֆայլ:"
 
-#: core\app.py:813
+#: dupeguru/core/app.py:866
 msgid "Collecting files to scan"
 msgstr "Հավաքվում են ֆայլեր՝ ստուգելու համար"
 
-#: core\app.py:863
+#: dupeguru/core/app.py:932
 msgid "%s (%d discarded)"
 msgstr "%s (%d անպիտան)"
 
-#: core\directories.py:191
+#: dupeguru/core/directories.py:227
 msgid "Collected {} files to scan"
-msgstr ""
+msgstr "Հավաքվել է {} ֆայլ՝ ստուգելու համար"
 
-#: core\directories.py:207
+#: dupeguru/core/directories.py:243
 msgid "Collected {} folders to scan"
-msgstr ""
+msgstr "Հավաքվել են {} թղթապանակներ՝ ստուգելու համար"
 
-#: core\engine.py:27
+#: dupeguru/core/engine.py:27
 msgid "%d matches found from %d groups"
-msgstr ""
+msgstr "%d խումբից գտնվել է %d համապատասխանություն"
 
-#: core\gui\deletion_options.py:71
+#: dupeguru/core/gui/deletion_options.py:71
 msgid "You are sending {} file(s) to the Trash."
 msgstr "Դուք {} ֆայլ եք ուղարկում աղբարկղ:"
 
-#: core\gui\exclude_list_table.py:14
+#: dupeguru/core/gui/exclude_list_table.py:14
 msgid "Regular Expressions"
 msgstr "Կանոնավոր արտահայտություններ"
 
-#: core\gui\ignore_list_dialog.py:25
+#: dupeguru/core/gui/ignore_list_dialog.py:25
 msgid "Do you really want to remove all %d items from the ignore list?"
 msgstr "Ցանկանու՞մ եք հեռացնել բոլոր %d ֆայլերը անտեսումների ցանկից:"
 
-#: core\me\scanner.py:20 core\se\scanner.py:16
+#: dupeguru/core/me/scanner.py:20 dupeguru/core/se/scanner.py:16
 msgid "Filename"
 msgstr "Ֆայլի անունը"
 
-#: core\me\scanner.py:21
+#: dupeguru/core/me/scanner.py:21
 msgid "Filename - Fields"
 msgstr "Ֆայլի անվանումը - Դաշտեր"
 
-#: core\me\scanner.py:22
+#: dupeguru/core/me/scanner.py:22
 msgid "Filename - Fields (No Order)"
 msgstr "Ֆայլի անուն - դաշտեր (պատվեր չկա)"
 
-#: core\me\scanner.py:23
+#: dupeguru/core/me/scanner.py:23
 msgid "Tags"
 msgstr "Tags"
 
-#: core\me\scanner.py:24 core\pe\scanner.py:22 core\se\scanner.py:17
+#: dupeguru/core/me/scanner.py:24 dupeguru/core/pe/scanner.py:23
+#: dupeguru/core/se/scanner.py:17
 msgid "Contents"
 msgstr "Բովանդակություն"
 
-#: core\pe\matchblock.py:66
+#: dupeguru/core/pe/matchblock.py:119
 msgid "Analyzed %d/%d pictures"
 msgstr "Ստուգվում է %d/%d նկարները"
 
-#: core\pe\matchblock.py:183
+#: dupeguru/core/pe/matchblock.py:217
 msgid "Performed %d/%d chunk matches"
 msgstr "Կատարվում է %d/%d տվյալի համընկնում"
 
-#: core\pe\matchblock.py:191
+#: dupeguru/core/pe/matchblock.py:225
 msgid "Preparing for matching"
 msgstr "Նախապատրաստեցվում է համընկնումը"
 
-#: core\pe\matchblock.py:240
+#: dupeguru/core/pe/matchblock.py:274
 msgid "Verified %d/%d matches"
 msgstr "Ստուգում է %d/%d համընկնումները"
 
-#: core\pe\matchexif.py:19
+#: dupeguru/core/pe/matchexif.py:19
 msgid "Read EXIF of %d/%d pictures"
 msgstr "Կարդալ EXIF-ը d/%d նկարներից"
 
-#: core\pe\scanner.py:23
+#: dupeguru/core/pe/scanner.py:24
 msgid "EXIF Timestamp"
 msgstr "EXIF Timestamp"
 
-#: core\prioritize.py:70
+#: dupeguru/core/prioritize.py:103
 msgid "None"
 msgstr "Ոչինչ"
 
-#: core\prioritize.py:102
+#: dupeguru/core/prioritize.py:141
 msgid "Ends with number"
 msgstr "Ավարտվում է թվով"
 
-#: core\prioritize.py:103
+#: dupeguru/core/prioritize.py:142
 msgid "Doesn't end with number"
 msgstr "Չի ավարտվում է թվով"
 
-#: core\prioritize.py:104
+#: dupeguru/core/prioritize.py:143
 msgid "Longest"
 msgstr "Ամենաերկար"
 
-#: core\prioritize.py:105
+#: dupeguru/core/prioritize.py:144
 msgid "Shortest"
 msgstr "Ամենակարճը"
 
-#: core\prioritize.py:142
+#: dupeguru/core/prioritize.py:145
+msgid "Longest Path"
+msgstr "Ամենաերկար ուղին"
+
+#: dupeguru/core/prioritize.py:146
+msgid "Shortest Path"
+msgstr "Ամենակարճ ուղին"
+
+#: dupeguru/core/prioritize.py:147
+msgid "A to Z"
+msgstr "A-ից մինչև Z"
+
+#: dupeguru/core/prioritize.py:148
+msgid "Z to A"
+msgstr "Z-ից A"
+
+#: dupeguru/core/prioritize.py:149
+msgid "A to Z, natural order"
+msgstr "Ա-ից Ֆ, բնական կարգով"
+
+#: dupeguru/core/prioritize.py:150
+msgid "Z to A, natural order"
+msgstr "Z-ից A, բնական հերթականությամբ"
+
+#: dupeguru/core/prioritize.py:203
 msgid "Highest"
 msgstr "Ամենաբարձրը"
 
-#: core\prioritize.py:142
+#: dupeguru/core/prioritize.py:203
 msgid "Lowest"
 msgstr "Ամենացածրը"
 
-#: core\prioritize.py:171
+#: dupeguru/core/prioritize.py:232
 msgid "Newest"
 msgstr "Նորագույնը"
 
-#: core\prioritize.py:171
+#: dupeguru/core/prioritize.py:232
 msgid "Oldest"
 msgstr "Ամենահինը"
 
-#: core\results.py:135
+#: dupeguru/core/results.py:143
 msgid "%d / %d (%s / %s) duplicates marked."
 msgstr "%d / %d (%s / %s) նշված կրկնօրինակներ:"
 
-#: core\results.py:142
+#: dupeguru/core/results.py:151
+msgid " Reference files marked: %d (%s)."
+msgstr " Հղումային ֆայլեր նշված՝ %d (%s):"
+
+#: dupeguru/core/results.py:156
 msgid " filter: %s"
 msgstr "ֆիլտր. %s"
 
-#: core\scanner.py:114
+#: dupeguru/core/scanner.py:114
 msgid "Read metadata of %d/%d files"
 msgstr "Կարդալ %d/%d ֆայլերի մետատվյալները"
 
-#: core\scanner.py:152
+#: dupeguru/core/scanner.py:152
 msgid "Almost done! Fiddling with results..."
 msgstr "Գրեթե արված է! Արդյունքների կազմակերպում..."
 
-#: core\se\scanner.py:18
+#: dupeguru/core/se/scanner.py:18
 msgid "Folders"
 msgstr "Թղթապանակներ"

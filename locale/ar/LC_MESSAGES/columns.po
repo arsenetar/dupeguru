@@ -10,113 +10,114 @@ msgstr ""
 "Content-Transfer-Encoding: utf-8\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
-#: core\gui\ignore_list_table.py:19 core\gui\ignore_list_table.py:20
-#: core\gui\problem_table.py:18
+#: dupeguru/core/gui/ignore_list_table.py:19
+#: dupeguru/core/gui/ignore_list_table.py:20
+#: dupeguru/core/gui/problem_table.py:18
 msgid "File Path"
 msgstr "مسار الملف"
 
-#: core\gui\problem_table.py:19
+#: dupeguru/core/gui/problem_table.py:19
 msgid "Error Message"
 msgstr "رسالة خطأ"
 
-#: core\me\prioritize.py:23
+#: dupeguru/core/me/prioritize.py:23
 msgid "Duration"
 msgstr "مدة"
 
-#: core\me\prioritize.py:30 core\me\result_table.py:23
+#: dupeguru/core/me/prioritize.py:30 dupeguru/core/me/result_table.py:23
 msgid "Bitrate"
 msgstr "معدل البت"
 
-#: core\me\prioritize.py:37
+#: dupeguru/core/me/prioritize.py:37
 msgid "Samplerate"
 msgstr "معدل العينة"
 
-#: core\me\result_table.py:19 core\pe\result_table.py:19 core\prioritize.py:94
-#: core\se\result_table.py:19
+#: dupeguru/core/me/result_table.py:19 dupeguru/core/pe/result_table.py:19
+#: dupeguru/core/prioritize.py:127 dupeguru/core/se/result_table.py:19
 msgid "Filename"
 msgstr "اسم الملف"
 
-#: core\me\result_table.py:20 core\pe\result_table.py:20 core\prioritize.py:75
-#: core\se\result_table.py:20
+#: dupeguru/core/me/result_table.py:20 dupeguru/core/pe/result_table.py:20
+#: dupeguru/core/prioritize.py:108 dupeguru/core/se/result_table.py:20
 msgid "Folder"
 msgstr "مجلد"
 
-#: core\me\result_table.py:21
+#: dupeguru/core/me/result_table.py:21
 msgid "Size (MB)"
 msgstr "الحجم (ميغا بايت)"
 
-#: core\me\result_table.py:22
+#: dupeguru/core/me/result_table.py:22
 msgid "Time"
 msgstr "زمن"
 
-#: core\me\result_table.py:24
+#: dupeguru/core/me/result_table.py:24
 msgid "Sample Rate"
 msgstr "معدل العينة"
 
-#: core\me\result_table.py:25 core\pe\result_table.py:22 core\prioritize.py:65
-#: core\se\result_table.py:22
+#: dupeguru/core/me/result_table.py:25 dupeguru/core/pe/result_table.py:22
+#: dupeguru/core/prioritize.py:98 dupeguru/core/se/result_table.py:22
 msgid "Kind"
 msgstr "طيب القلب"
 
-#: core\me\result_table.py:26 core\pe\result_table.py:25
-#: core\prioritize.py:165 core\se\result_table.py:23
+#: dupeguru/core/me/result_table.py:26 dupeguru/core/pe/result_table.py:25
+#: dupeguru/core/prioritize.py:226 dupeguru/core/se/result_table.py:23
 msgid "Modification"
 msgstr "تعديل"
 
-#: core\me\result_table.py:27
+#: dupeguru/core/me/result_table.py:27
 msgid "Title"
 msgstr "عنوان"
 
-#: core\me\result_table.py:28
+#: dupeguru/core/me/result_table.py:28
 msgid "Artist"
 msgstr "فنان"
 
-#: core\me\result_table.py:29
+#: dupeguru/core/me/result_table.py:29
 msgid "Album"
 msgstr "البوم"
 
-#: core\me\result_table.py:30
+#: dupeguru/core/me/result_table.py:30
 msgid "Genre"
 msgstr "النوع"
 
-#: core\me\result_table.py:31
+#: dupeguru/core/me/result_table.py:31
 msgid "Year"
 msgstr "سنة"
 
-#: core\me\result_table.py:32
+#: dupeguru/core/me/result_table.py:32
 msgid "Track Number"
 msgstr "رقم الشاحنة"
 
-#: core\me\result_table.py:33
+#: dupeguru/core/me/result_table.py:33
 msgid "Comment"
 msgstr "تعليق"
 
-#: core\me\result_table.py:34 core\pe\result_table.py:26
-#: core\se\result_table.py:24
+#: dupeguru/core/me/result_table.py:34 dupeguru/core/pe/result_table.py:26
+#: dupeguru/core/se/result_table.py:24
 msgid "Match %"
 msgstr "مباراة ٪"
 
-#: core\me\result_table.py:35 core\se\result_table.py:25
+#: dupeguru/core/me/result_table.py:35 dupeguru/core/se/result_table.py:25
 msgid "Words Used"
 msgstr "الكلمات المستخدمة"
 
-#: core\me\result_table.py:36 core\pe\result_table.py:27
-#: core\se\result_table.py:26
+#: dupeguru/core/me/result_table.py:36 dupeguru/core/pe/result_table.py:27
+#: dupeguru/core/se/result_table.py:26
 msgid "Dupe Count"
 msgstr "عدد المخادعين"
 
-#: core\pe\prioritize.py:23 core\pe\result_table.py:23
+#: dupeguru/core/pe/prioritize.py:23 dupeguru/core/pe/result_table.py:23
 msgid "Dimensions"
 msgstr "أبعاد"
 
-#: core\pe\result_table.py:21 core\se\result_table.py:21
+#: dupeguru/core/pe/result_table.py:21 dupeguru/core/se/result_table.py:21
 msgid "Size (KB)"
 msgstr "الحجم (كيلو بايت)"
 
-#: core\pe\result_table.py:24
+#: dupeguru/core/pe/result_table.py:24
 msgid "EXIF Timestamp"
 msgstr "الطابع الزمني EXIF"
 
-#: core\prioritize.py:158
+#: dupeguru/core/prioritize.py:219
 msgid "Size"
 msgstr "بحجم"
