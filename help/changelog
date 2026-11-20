@@ -1,7 +1,9 @@
-=== 4.3.1^20261116git (2026-11-16)
+=== 4.3.1^20261120git (2026-11-20)
 * Add bulk folder-state changes using Ctrl/Shift selection
 * Preserve selected rows and expanded folders when changing Normal, Reference, or Excluded
 * Add tested Windows installer and portable release builds
+* new translations by transifex
+* finish changing github arsenetar references to carlbyington2
 
 === 4.3.1^20261101git (2026-11-01)
 * cleanup packaging requirements, remove references to OSX cocoa

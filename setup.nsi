@@ -50,7 +50,7 @@ SetCompressor /SOLID lzma
 !define APPLICENSE "LICENSE"           ; License is not in build directory
 !define APPICON "images\dgse_logo.ico" ; nor is the icon
 !define DISTDIR "dist"
-!define HELPURL "https://github.com/arsenetar/dupeguru/issues"
+!define HELPURL "https://github.com/carlbyington2/dupeguru/issues"
 !define UPDATEURL "https://dupeguru.voltaicideas.net/"
 !define ABOUTURL "https://dupeguru.voltaicideas.net/"
 
