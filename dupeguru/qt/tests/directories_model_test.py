@@ -14,7 +14,7 @@ from dupeguru.qt.directories_model import DirectoriesModel, DirectoriesDelegate,
 
 @pytest.fixture
 def folders(tmp_path):
-    application = QApplication.instance() or QApplication([])
+    application = QApplication([])
     root = tmp_path / "Albums"
     for name in ["Aaron", "Alice", "Bob"]:
         (root / name / "Record").mkdir(parents=True)
@@ -22,9 +22,9 @@ def folders(tmp_path):
     store.add_path(root)
     tree = DirectoryTree(SimpleNamespace(directories=store))
     view = DirectoriesView()
-    view.setSelectionMode(QAbstractItemView.ExtendedSelection)
-    view.setSelectionBehavior(QAbstractItemView.SelectRows)
-    view.setEditTriggers(QAbstractItemView.SelectedClicked | QAbstractItemView.EditKeyPressed)
+    view.setSelectionMode(QAbstractItemView.SelectionMode.ExtendedSelection)
+    view.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
+    view.setEditTriggers(QAbstractItemView.EditTrigger.SelectedClicked | QAbstractItemView.EditTrigger.EditKeyPressed)
     model = DirectoriesModel(tree, view)
     view.setItemDelegate(DirectoriesDelegate(view))
     view.resize(640, 480)
@@ -39,8 +39,8 @@ def child(model, row, column=0):
     return model.index(row, column, model.index(0, 0, QModelIndex()))
 
 
-def click(view, index, modifiers=Qt.NoModifier):
-    QTest.mouseClick(view.viewport(), Qt.LeftButton, modifiers, view.visualRect(index).center())
+def click(view, index, modifiers=Qt.KeyboardModifier.NoModifier):
+    QTest.mouseClick(view.viewport(), Qt.MouseButton.LeftButton, modifiers, view.visualRect(index).center())
 
 
 @pytest.mark.parametrize("value", [0, 1, 2])
@@ -51,13 +51,13 @@ def test_ctrl_shift_bulk_and_persistence(folders, tmp_path, value):
     store.set_state(root / "Alice", 2)
     tree.update_all_states()
     click(view, child(model, 0))
-    click(view, child(model, 2), Qt.ControlModifier)
+    click(view, child(model, 2), Qt.KeyboardModifier.ControlModifier)
     assert len(view.selectionModel().selectedRows()) == 2
     click(view, child(model, 0))
-    click(view, child(model, 1), Qt.ShiftModifier)
+    click(view, child(model, 1), Qt.KeyboardModifier.ShiftModifier)
     assert len(view.selectionModel().selectedRows()) == 2
     changed = QSignalSpy(model.dataChanged)
-    assert model.setData(child(model, 0, 1), value, Qt.EditRole)
+    assert model.setData(child(model, 0, 1), value, Qt.ItemDataRole.EditRole)
     assert len(changed) == 1
     assert len(view.selectionModel().selectedRows()) == 2
     assert view.isExpanded(model.index(0, 0, QModelIndex()))
@@ -72,13 +72,13 @@ def test_ctrl_shift_bulk_and_persistence(folders, tmp_path, value):
     restored.load_from_file(saved)
     assert restored.states == store.states
     tree.directories_changed()
-    assert model.data(child(model, 0, 1), Qt.EditRole) == value
+    assert model.data(child(model, 0, 1), Qt.ItemDataRole.EditRole) == value
 
 
 def test_click_state_preserves_bulk_selection(folders):
     application, root, store, tree, view, model = folders
     click(view, child(model, 0))
-    click(view, child(model, 1), Qt.ControlModifier)
+    click(view, child(model, 1), Qt.KeyboardModifier.ControlModifier)
     click(view, child(model, 0, 1))
     QTest.qWait(QApplication.doubleClickInterval() + 50)
     assert len(view.selectionModel().selectedRows()) == 2
@@ -93,15 +93,15 @@ def test_click_state_preserves_bulk_selection(folders):
 def test_single_unselected_target_and_invalid_edits(folders):
     application, root, store, tree, view, model = folders
     click(view, child(model, 0))
-    assert model.setData(child(model, 1, 1), 2, Qt.EditRole)
+    assert model.setData(child(model, 1, 1), 2, Qt.ItemDataRole.EditRole)
     assert store.get_state(root / "Aaron") == 0
     assert store.get_state(root / "Alice") == 2
-    assert model.setData(child(model, 0, 1), 1, Qt.EditRole)
+    assert model.setData(child(model, 0, 1), 1, Qt.ItemDataRole.EditRole)
     assert store.get_state(root / "Aaron") == 1
-    assert not model.setData(QModelIndex(), 1, Qt.EditRole)
-    assert not model.setData(child(model, 0), 1, Qt.EditRole)
-    assert not model.setData(child(model, 0, 1), -1, Qt.EditRole)
-    assert not model.setData(child(model, 0, 1), 3, Qt.EditRole)
+    assert not model.setData(QModelIndex(), 1, Qt.ItemDataRole.EditRole)
+    assert not model.setData(child(model, 0), 1, Qt.ItemDataRole.EditRole)
+    assert not model.setData(child(model, 0, 1), -1, Qt.ItemDataRole.EditRole)
+    assert not model.setData(child(model, 0, 1), 3, Qt.ItemDataRole.EditRole)
 
 
 @pytest.mark.parametrize("value", [0, 1, 2])
@@ -119,5 +119,7 @@ def test_selected_parent_and_child(folders, value, reverse):
     assert store.get_state(root / "Aaron") == value
     assert store.get_state(root / "Aaron" / "Record") == value
     selection = view.selectionModel()
-    selection.select(child(model, 0), QItemSelectionModel.ClearAndSelect | QItemSelectionModel.Rows)
+    selection.select(
+        child(model, 0), QItemSelectionModel.SelectionFlag.ClearAndSelect | QItemSelectionModel.SelectionFlag.Rows
+    )
     assert len(selection.selectedRows()) == 1

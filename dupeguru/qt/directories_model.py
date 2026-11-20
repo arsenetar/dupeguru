@@ -32,13 +32,13 @@ class DirectoriesView(QTreeView):
         # Opening a selected state editor must not collapse a bulk selection.
         if (
             event is not None
-            and event.type() in (QEvent.MouseButtonPress, QEvent.MouseButtonRelease)
-            and event.button() == Qt.LeftButton
-            and event.modifiers() == Qt.NoModifier
+            and event.type() in (QEvent.Type.MouseButtonPress, QEvent.Type.MouseButtonRelease)
+            and event.button() == Qt.MouseButton.LeftButton
+            and event.modifiers() == Qt.KeyboardModifier.NoModifier
             and index.column() == 1
             and self.selectionModel().isSelected(index)
         ):
-            return QItemSelectionModel.NoUpdate
+            return QItemSelectionModel.SelectionFlag.NoUpdate
         return super().selectionCommand(index, event)
 
 
@@ -50,7 +50,7 @@ class DirectoriesDelegate(QStyledItemDelegate):
 
     def paint(self, painter, option, index):
         self.initStyleOption(option, index)
-        # No idea why, but this cast is required if we want to have access to the V4 valuess
+        # No idea why, but this cast is required if we want to have access to the V4 values
         option = QStyleOptionViewItem(option)
         if (index.column() == 1) and (option.state & QStyle.StateFlag.State_Selected):
             cboption = QStyleOptionComboBox()
