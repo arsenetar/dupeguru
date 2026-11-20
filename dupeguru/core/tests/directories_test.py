@@ -12,7 +12,7 @@ import shutil
 from pytest import raises
 from pathlib import Path
 from dupeguru.hscommon.testutil import eq_
-from dupeguru.hscommon.plat import ISWINDOWS
+from dupeguru.hscommon.plat import ISWINDOWS, ISOSX
 
 from dupeguru.core.fs import File
 from dupeguru.core.directories import (
@@ -399,7 +399,8 @@ def test_get_files_handles_deeply_nested_directories(tmpdir):
         rootpath = Path("\\\\?\\" + str(rootpath))
     currentpath = rootpath
     currentpath.mkdir(parents=True)
-    for _ in range(1200):
+    limit = 440 if ISOSX else 1200
+    for _ in range(limit):
         currentpath = currentpath.joinpath("d")
         currentpath.mkdir()
     currentpath.joinpath("deepfile.test").touch()
@@ -452,10 +453,8 @@ class TestExcludeList:
     def get_files_and_expect_num_result(self, num_result):
         """Calls get_files(), get the filenames only, print for debugging.
         num_result is how many files are expected as a result."""
-        print(
-            f"EXCLUDED REGEX: paths {self.d._exclude_list.compiled_paths} \
-files: {self.d._exclude_list.compiled_files} all: {self.d._exclude_list.compiled}"
-        )
+        print(f"EXCLUDED REGEX: paths {self.d._exclude_list.compiled_paths} \
+files: {self.d._exclude_list.compiled_files} all: {self.d._exclude_list.compiled}")
         files = list(self.d.get_files())
         files = [file.name for file in files]
         print(f"FINAL FILES {files}")

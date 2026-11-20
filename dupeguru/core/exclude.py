@@ -338,10 +338,8 @@ class ExcludeList(Markable):
                 # "forced" avoids compilation exceptions and adds anyway
                 self.add(regex_string, forced=True)
             except AlreadyThereException:
-                logging.error(
-                    f'Regex "{regex_string}" \
-loaded from XML was already present in the list.'
-                )
+                logging.error(f'Regex "{regex_string}" \
+loaded from XML was already present in the list.')
                 continue
             if exclude_item.get("marked") == "y":
                 marked.add(regex_string)

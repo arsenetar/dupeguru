@@ -70,9 +70,14 @@ class File(PhotoBase):
             elif orientation == 8:
                 t.rotate(270)
             image = image.transformed(t)
-        prescale_multiplier = getattr(self, '_prescale_multiplier', 30)
+        prescale_multiplier = getattr(self, "_prescale_multiplier", 30)
         if prescale_multiplier > 0:
             target_size = block_count_per_side * prescale_multiplier
             if image.width() > target_size or image.height() > target_size:
-                image = image.scaled(target_size, target_size, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
+                image = image.scaled(
+                    target_size,
+                    target_size,
+                    Qt.AspectRatioMode.KeepAspectRatio,
+                    Qt.TransformationMode.SmoothTransformation,
+                )
         return getblocks(image, block_count_per_side)

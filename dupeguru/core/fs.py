@@ -76,11 +76,13 @@ class FSError(Exception):
 
 class AlreadyExistsError(FSError):
     "The directory or file name we're trying to add already exists"
+
     cls_message = "'{name}' already exists in '{parent}'"
 
 
 class InvalidPath(FSError):
     "The path of self is invalid, and cannot be worked with."
+
     cls_message = "'{name}' is invalid."
 
 
