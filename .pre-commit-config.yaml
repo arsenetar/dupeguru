@@ -8,14 +8,14 @@ repos:
         exclude: ".*.json"
       - id: trailing-whitespace
   - repo: https://github.com/psf/black
-    rev: 24.2.0
+    rev: 26.5.1
     hooks:
       - id: black
   - repo: https://github.com/PyCQA/flake8
     rev: 7.0.0
     hooks:
       - id: flake8
-        exclude: ^(.tox|env|build|dist|help|qt/dg_rc.py|pkg).*
+        exclude: ^(.tox|env|build|dist|help|dupeguru/qt/dg_rc.py|pkg).*
   - repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
     rev: v9.11.0
     hooks:
