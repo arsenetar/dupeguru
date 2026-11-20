@@ -56,7 +56,7 @@ def parse_args():
         dest="modules",
         help="Build the python modules.",
     )
-    (options, args) = parser.parse_args()
+    options, args = parser.parse_args()
     return options
 
 
@@ -64,7 +64,7 @@ def build_one_help(language):
     print(f"Generating Help in {language}")
     current_path = Path(".").absolute()
     changelog_path = current_path.joinpath("help", "changelog")
-    tixurl = "https://github.com/arsenetar/dupeguru/issues/{}"
+    tixurl = "https://github.com/carlbyington2/dupeguru/issues/{}"
     changelogtmpl = current_path.joinpath("help", "changelog.tmpl")
     conftmpl = current_path.joinpath("help", "conf.tmpl")
     help_basepath = current_path.joinpath("help", language)
@@ -99,11 +99,11 @@ def build_localizations():
 def build_updatepot():
     print("Building .pot files from source files")
     print("Building core.pot")
-    loc.generate_pot(["core"], Path("locale", "core.pot"), ["tr"])
+    loc.generate_pot(["dupeguru/core"], Path("locale", "core.pot"), ["tr"])
     print("Building columns.pot")
-    loc.generate_pot(["core"], Path("locale", "columns.pot"), ["coltr"])
+    loc.generate_pot(["dupeguru/core"], Path("locale", "columns.pot"), ["coltr"])
     print("Building ui.pot")
-    loc.generate_pot(["qt"], Path("locale", "ui.pot"), ["tr"], merge=True)
+    loc.generate_pot(["dupeguru/qt"], Path("locale", "ui.pot"), ["tr"], merge=True)
 
 
 def build_mergepot():
@@ -129,9 +129,11 @@ def build_normal():
     print("Building localizations")
     build_localizations()
     print("Building Qt stuff")
-    Path("qt", "dg_rc.py").unlink(missing_ok=True)
-    print_and_do("rcc -g python {} -o {}".format(Path("qt", "dg.qrc"), Path("qt", "dg_rc.py")))
-    fix_qt_resource_file(Path("qt", "dg_rc.py"))
+    Path("dupeguru", "qt", "dg_rc.py").unlink(missing_ok=True)
+    print_and_do(
+        "pyside6-rcc -g python {} -o {}".format(Path("dupeguru", "qt", "dg.qrc"), Path("dupeguru", "qt", "dg_rc.py"))
+    )
+    fix_qt_resource_file(Path("dupeguru", "qt", "dg_rc.py"))
     build_help()
 
 
